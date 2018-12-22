@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>me.prouser123.bungee</groupId>
+  <artifactId>discord</artifactId>
+  <version>1.0-STABLE</version>
+
+  <name>discord</name>
+  <url>http://maven.apache.org</url>
+  
+  <repositories>
+    <repository>
+      <id>sonatype-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+  </repositories>
+  
+  <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source/>
+          <target/>
+        </configuration>
+      </plugin>
+      <!-- Package JavaCord & Dependencies in KodiCore -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+            <minimizeJar>false</minimizeJar>
+              <artifactSet>
+                <includes>
+                  <include>org.javacord:javacord</include>
+                  <include>org.javacord:javacord-api</include>
+                  <include>org.javacord:javacord-core</include>
+                  <include>com.squareup.okhttp3:okhttp</include>
+                  <include>com.squareup.okio:okio</include>
+                  <include>com.squareup.okhttp3:logging-interceptor</include>
+                  <include>com.fasterxml.jackson.core:jackson-databind</include>
+                  <include>com.fasterxml.jackson.core:jackson-annotations</include>
+                  <include>com.fasterxml.jackson.core:jackson-core</include>
+                  <include>com.neovisionaries:nv-websocket-client</include>
+                  <include>org.apache.logging.log4j:log4j-api</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>net.md-5</groupId>
+      <artifactId>bungeecord-api</artifactId>
+      <version>1.12-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.md-5</groupId>
+      <artifactId>bungeecord-api</artifactId>
+      <version>1.12-SNAPSHOT</version>
+      <type>javadoc</type>
+      <scope>provided</scope>
+    </dependency>
+    <!-- JavaCord (Discord Library) -->
+    <dependency>
+      <groupId>org.javacord</groupId>
+      <artifactId>javacord</artifactId>
+      <version>3.0.1</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+  <properties>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+  	<maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+</project>

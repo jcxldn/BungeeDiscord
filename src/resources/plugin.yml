@@ -1,0 +1,4 @@
+name: BungeeDiscord
+main: me.prouser123.bungee.discord.Main
+version: ${project.version}
+author: Prouser123
