@@ -9,6 +9,8 @@ import java.io.*;
 
 import com.google.common.io.ByteStreams;
 
+import me.prouser123.bstatsplus.bungee.MetricsLite;
+
 public class Main extends Plugin {
 
 	// Instancing
@@ -29,6 +31,9 @@ public class Main extends Plugin {
 		instance = this;
 		
 		getLogger().info("Welcome!");
+		
+		// Start bStats
+		new MetricsLite(this, true);
 		
 		// Setup config
 		loadResource(this, "config.yml");
