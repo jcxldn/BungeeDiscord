@@ -76,7 +76,7 @@ public class ServerInfo implements MessageCreateListener {
             	.addInlineField("Servers", Integer.toString(Main.inst().getProxy().getServers().size()))
             	.addInlineField("Server Versions", Main.inst().getProxy().getGameVersion().toString())
             	.addInlineField("Bot Owner", bot_owner)
-            	.addInlineField("Server Version", Main.inst().getProxy().getVersion())
+            	.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion())
             	.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString()/*.split("-")[0]*/, "https://cdn.discordapp.com/avatars/215119410103451648/575d90fdda8663b633e36f8b8c06c719.png");
             	// Send the embed
             event.getChannel().sendMessage(embed2);
