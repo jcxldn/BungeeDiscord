@@ -1,2 +1,8 @@
 # Bungee Discord Config File
+# Make sure there is always a space after any :
+
 token: bot-token-here
+
+# Chat to a text channel when someone connects or disconnnects from the proxy / bungeecord / network
+# Leave as-is to disable
+join-leave-chat-id: '123456789'

@@ -6,6 +6,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.*;
+import java.util.NoSuchElementException;
 
 import com.google.common.io.ByteStreams;
 
@@ -45,7 +46,27 @@ public class Main extends Plugin {
         
         new Discord(getConfig().getString("token"));
 		Discord.api.addMessageCreateListener(new ServerInfo());
+		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
+		
+		// Register Bungee Player Join/Leave Listeners
+		String jlcID = getConfig().getString("join-leave-chat-id");
+		
+		//if (jlcID == "123456789") {
+		//	getLogger().info("jlcID disabled as left as-is.");
+		//} else {
+		//	getLogger().info("jlcID: " + jlcID);
+		//	getProxy().getPluginManager().registerListener(this, new JoinLeave(jlcID));
+		//}
+		
+		try {
+			getProxy().getPluginManager().registerListener(this, new JoinLeave(jlcID));
+			getLogger().info("Join Leave Chat enabled for channel: #" + Discord.api.getChannelById(jlcID).toString().replaceAll(".*\\[|\\].*", "") + " (id: " + jlcID + ")");
+		} catch (NoSuchElementException e) {
+
+			getLogger().info("Join Leave Chat disabled. Did you put a valid channel ID in the config?");
+			return;
+		}
 	}
 	
 	public static File loadResource(Plugin plugin, String resource) {
@@ -66,4 +87,11 @@ public class Main extends Plugin {
         }
         return resourceFile;
     }
+	
+	@Override
+	public void onDisable() {
+		if (Discord.api != null) {
+			Discord.api.disconnect();
+		}
+	}
 }

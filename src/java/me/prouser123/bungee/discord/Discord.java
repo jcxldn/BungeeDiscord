@@ -1,8 +1,10 @@
 package me.prouser123.bungee.discord;
 
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
 
 import org.javacord.api.DiscordApi;
 
@@ -34,8 +36,37 @@ public class Discord {
         // Print the invite url of the bot
         Main.inst().getLogger().info("Bot Invite Link: " + api.createBotInvite());
         
+        // Set Activity
+        api.updateActivity("!bd | BungeeDiscord");
+        
         // Create server join Listeners
         api.addServerJoinListener(event -> Main.inst().getLogger().info("Joined Server: " + event.getServer().getName()));
         api.addServerLeaveListener(event -> Main.inst().getLogger().info("Left Server: " + event.getServer().getName()));
+        
+        // Add Reconnect Listener to re-add status
+        api.addReconnectListener(event -> {
+        	Main.inst().getLogger().info(("Reconnected to Discord."));
+        	api.updateActivity("!bd | BungeeDiscord");
+        });
+        
+        api.addResumeListener(event -> {
+        	Main.inst().getLogger().info(("Resumed connection to Discord."));
+        	api.updateActivity("!bd | BungeeDiscord");
+        });
+	}
+	
+	public static String getBotOwner(MessageCreateEvent event) {
+    	String bot_owner = "<@";
+    	try {
+			bot_owner += Long.toString(event.getApi().getApplicationInfo().get().getOwnerId());
+			bot_owner += ">";
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return bot_owner;
 	}
 }
