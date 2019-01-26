@@ -15,15 +15,14 @@ public class MainCommand implements MessageCreateListener {
 	 */
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        // Check if the message content equals "!copyAvatar"
+        // Check if the message content equals "!bd"
         if (event.getMessage().getContent().equalsIgnoreCase("!bd")) {
         	
-        	EmbedBuilder embed = new EmbedBuilder();
-        	
-        	embed.setTitle("Commands");
-        	embed.addField("!serverinfo", "Show server information.");
-        	embed.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
-        	embed.addField("!players", "Show players currently on the network and their servers.");
+        	EmbedBuilder embed = new EmbedBuilder()
+        			.setTitle("Commands")
+        			.addField("!serverinfo", "Show server information.")
+        			.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.")
+        			.addField("!players", "Show players currently on the network and their servers.");
         	
         	event.getChannel().sendMessage(embed);
         	

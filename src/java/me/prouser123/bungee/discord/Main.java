@@ -48,6 +48,10 @@ public class Main extends Plugin {
 		}
         
         new Discord(getConfig().getString("token"));
+        
+        // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
+        Discord.api.setMessageCacheSize(10, 60*60);
+        
 		Discord.api.addMessageCreateListener(new ServerInfo());
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
