@@ -21,8 +21,9 @@ public class MainCommand implements MessageCreateListener {
         	EmbedBuilder embed = new EmbedBuilder();
         	
         	embed.setTitle("Commands");
-        	embed.addField("!serverinfo", "Show server information");
-        	embed.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar");
+        	embed.addField("!serverinfo", "Show server information.");
+        	embed.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
+        	embed.addField("!players", "Show players currently on the network and their servers.");
         	
         	event.getChannel().sendMessage(embed);
         	

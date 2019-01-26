@@ -11,9 +11,9 @@ import java.util.NoSuchElementException;
 import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.MetricsLite;
-import me.prouser123.bungee.discord.commands.CopyOwnerAvatar;
-import me.prouser123.bungee.discord.commands.MainCommand;
-import me.prouser123.bungee.discord.commands.ServerInfo;
+
+// Since we need all the commands here, this is fine.
+import me.prouser123.bungee.discord.commands.*;
 
 public class Main extends Plugin {
 
@@ -51,6 +51,7 @@ public class Main extends Plugin {
 		Discord.api.addMessageCreateListener(new ServerInfo());
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
+		Discord.api.addMessageCreateListener(new Players());
 		
 		// Register Bungee Player Join/Leave Listeners
 		String jlcID = getConfig().getString("join-leave-chat-id");
