@@ -1,4 +1,4 @@
-package me.prouser123.bungee.discord;
+package me.prouser123.bungee.discord.commands;
 
 import java.lang.management.ManagementFactory;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,6 @@ public class ServerInfo implements MessageCreateListener {
         if (event.getMessage().getContent().equalsIgnoreCase("!serverinfo")) {
         	
         	SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss.SSS");
-            //formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         	String uptime = formatter.format(ManagementFactory.getRuntimeMXBean().getUptime());
         	String[] uptime_split = uptime.split(":");
         	
@@ -55,7 +54,6 @@ public class ServerInfo implements MessageCreateListener {
         	// Get Bot Owner
         	String bot_owner = "<@";
         	try {
-				//bot_owner = event.getApi().getApplicationInfo().get().getOwnerName().toString();
 				bot_owner += Long.toString(event.getApi().getApplicationInfo().get().getOwnerId());
 				bot_owner += ">";
 			} catch (InterruptedException e) {

@@ -11,6 +11,9 @@ import java.util.NoSuchElementException;
 import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.MetricsLite;
+import me.prouser123.bungee.discord.commands.CopyOwnerAvatar;
+import me.prouser123.bungee.discord.commands.MainCommand;
+import me.prouser123.bungee.discord.commands.ServerInfo;
 
 public class Main extends Plugin {
 
@@ -51,13 +54,6 @@ public class Main extends Plugin {
 		
 		// Register Bungee Player Join/Leave Listeners
 		String jlcID = getConfig().getString("join-leave-chat-id");
-		
-		//if (jlcID == "123456789") {
-		//	getLogger().info("jlcID disabled as left as-is.");
-		//} else {
-		//	getLogger().info("jlcID: " + jlcID);
-		//	getProxy().getPluginManager().registerListener(this, new JoinLeave(jlcID));
-		//}
 		
 		try {
 			getProxy().getPluginManager().registerListener(this, new JoinLeave(jlcID));

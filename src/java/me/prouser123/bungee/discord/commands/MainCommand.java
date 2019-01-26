@@ -1,8 +1,11 @@
-package me.prouser123.bungee.discord;
+package me.prouser123.bungee.discord.commands;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
+
+import me.prouser123.bungee.discord.Discord;
+import me.prouser123.bungee.discord.JoinLeave;
 
 public class MainCommand implements MessageCreateListener {
 	
