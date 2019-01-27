@@ -9,9 +9,25 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.base.BaseCommand;
+import me.prouser123.bungee.discord.base.BaseCommand.base;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
-public class Players implements MessageCreateListener {
+public class Players implements MessageCreateListener, BaseCommand {
+
+	private base base;
+	
+	public Players(int piority, String command, String helpText) {
+		
+		base = this.createBase();
+		
+		Main.inst().getLogger().info("[Players@Init] " + piority + " | " + command + " | " + helpText);
+		base.command = command;
+		//this.base().helpPriority = piority;
+		base.helpText = helpText;
+		Main.inst().getLogger().info("[Players@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.addCommandToHelp(base);
+	}
 	
     @Override
     public void onMessageCreate(MessageCreateEvent event) {

@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.MetricsLite;
-
+import me.prouser123.bungee.discord.base.Test;
 // Since we need all the commands here, this is fine.
 import me.prouser123.bungee.discord.commands.*;
 
@@ -38,6 +38,9 @@ public class Main extends Plugin {
 		
 		getLogger().info("Welcome!");
 		
+		Test t = new Test();
+		t.new Test2();
+		
 		// Start bStats
 		new MetricsLite(this, true);
 		
@@ -55,10 +58,10 @@ public class Main extends Plugin {
         Discord.api.setMessageCacheSize(10, 60*60);
         
         getLogger().info("Registering commands...");
-		Discord.api.addMessageCreateListener(new ServerInfo());
 		Discord.api.addMessageCreateListener(new MainCommand());
+		Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
-		Discord.api.addMessageCreateListener(new Players());
+		Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
 		Discord.api.addMessageCreateListener(new BotInfo());
 		
 		new SubCommandLoader(Discord.api);

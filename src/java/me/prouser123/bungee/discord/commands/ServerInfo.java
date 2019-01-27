@@ -11,12 +11,27 @@ import org.javacord.api.listener.message.MessageCreateListener;
 import me.prouser123.bungee.discord.Constants;
 import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.base.BaseCommand;
 
-public class ServerInfo implements MessageCreateListener {
+public class ServerInfo implements MessageCreateListener, BaseCommand {
+	
+	private base base;
+	
+	public ServerInfo(int piority, String command, String helpText) {
+		
+		base = this.createBase();
+		
+		Main.inst().getLogger().info("[ServerInfo@Init] " + piority + " | " + command + " | " + helpText);
+		base.command = command;
+		//this.base().helpPriority = piority;
+		base.helpText = helpText;
+		Main.inst().getLogger().info("[ServerInfo@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.addCommandToHelp(base);
+	}
 	
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        if (event.getMessage().getContent().equalsIgnoreCase("!serverinfo")) {
+        if (event.getMessage().getContent().equalsIgnoreCase(this.base.command)) {
         	
         	SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss.SSS");
         	String uptime = formatter.format(ManagementFactory.getRuntimeMXBean().getUptime());
