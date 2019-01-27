@@ -18,11 +18,11 @@ public class Debug implements MessageCreateListener {
             		.setAuthor("BungeeDiscord Debug Information", Constants.url, Constants.authorIconURL)
             		.setDescription("Detailed information about the plugin and dependencies. Useful for debugging but not normally required.")
             		.addInlineField("JavaCord Version", Javacord.VERSION)
-            		.addInlineField("JavaCord API Version", Javacord.DISCORD_API_VERSION)
-            		.addInlineField("JavaCord Gateway Version", Javacord.DISCORD_GATEWAY_VERSION)
+            		.addInlineField("JavaCord API/Gateway Version", Javacord.DISCORD_API_VERSION + "/" + Javacord.DISCORD_GATEWAY_VERSION)
             		.addInlineField("JavaCord User Agent", Javacord.USER_AGENT)
             		.addInlineField("JavaCord Commit ID", Javacord.COMMIT_ID)
-            		.addInlineField("JavaCord Build Timestamp", Javacord.BUILD_TIMESTAMP.toString());
+            		.addInlineField("JavaCord Build Timestamp", Javacord.BUILD_TIMESTAMP.toString())
+            		.addInlineField("Registered Listeners", Integer.toString(Discord.api.getListeners().size()));
                 
             // Set footer
             Discord.setFooter(embed);
