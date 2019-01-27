@@ -80,7 +80,6 @@ public class ServerInfo implements MessageCreateListener {
             event.getChannel().sendMessage(embed2);
             return;
         }
-        return;
     }
 
 }

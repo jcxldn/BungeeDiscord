@@ -39,7 +39,6 @@ public class MainCommand implements MessageCreateListener {
         	event.getChannel().sendMessage(embed2);
             return;
         }
-        return;
     }
 
 }

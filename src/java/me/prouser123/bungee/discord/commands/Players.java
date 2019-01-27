@@ -46,7 +46,6 @@ public class Players implements MessageCreateListener {
             event.getChannel().sendMessage(embed2);
             return;
         }
-        return;
     }
 
 }

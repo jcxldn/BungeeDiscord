@@ -37,7 +37,6 @@ public class CopyOwnerAvatar implements MessageCreateListener {
                     });
             return;
         }
-        return;
     }
 
 }
