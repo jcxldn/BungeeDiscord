@@ -9,6 +9,7 @@ import org.javacord.api.Javacord;
 
 import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.Constants;
 
 public class BotInfo implements MessageCreateListener {
 	
@@ -32,17 +33,19 @@ public class BotInfo implements MessageCreateListener {
         		Main.inst().getLogger().info(role);
         	}
         	
-        	EmbedBuilder embed2 = new EmbedBuilder()
-        		.setAuthor("BungeeDiscord Bot Information", "https://github.com/Prouser123/KodiCore", "https://cdn.discordapp.com/embed/avatars/0.png")
+        	EmbedBuilder embed = new EmbedBuilder()
+        		.setAuthor("BungeeDiscord Bot Information", Constants.url, Constants.authorIconURL)
         		.addInlineField("BungeeDiscord Version", Main.inst().getDescription().getVersion().toString())
             	.addInlineField("JavaCord Version", Javacord.VERSION + " (API v" + Javacord.DISCORD_API_VERSION + ")")
             	.addInlineField("Bot Servers", Long.toString(Discord.api.getServers().size()))
             	.addInlineField("User Type", Discord.api.getAccountType().toString())
-            	.addInlineField("Roles (Current Server)", roles)
-            	// Set footer
-            	.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd"/*.split("-")[0]*/, "https://cdn.discordapp.com/avatars/215119410103451648/575d90fdda8663b633e36f8b8c06c719.png");
-            	// Send the embed
-            event.getChannel().sendMessage(embed2);
+            	.addInlineField("Roles (Current Server)", roles);
+            
+        	// Set footer
+        	Discord.setFooter(embed);
+            
+        	// Send the embed
+            event.getChannel().sendMessage(embed);
             return;
         }
     }

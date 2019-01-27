@@ -8,17 +8,14 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
+import me.prouser123.bungee.discord.Constants;
+import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
 
 public class ServerInfo implements MessageCreateListener {
 	
-	/**
-	 * Listener Command to show server information
-	 * Usage: (DiscordApi - e.g. Discord.api) api.addMessageCreateListener(new ServerInfo());
-	 */
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        // Check if the message content equals "!copyAvatar"
         if (event.getMessage().getContent().equalsIgnoreCase("!serverinfo")) {
         	
         	SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss.SSS");
@@ -64,20 +61,21 @@ public class ServerInfo implements MessageCreateListener {
 				e.printStackTrace();
 			}
         	
-        	EmbedBuilder embed2 = new EmbedBuilder()
-                //.setTitle("Title")
-                //.setDescription("Description")
-        		.setAuthor("BungeeCord Server Information", "https://github.com/Prouser123/KodiCore", "https://cdn.discordapp.com/embed/avatars/0.png")
+        	EmbedBuilder embed = new EmbedBuilder()
+        		.setAuthor("BungeeCord Server Information", Constants.url, Constants.authorIconURL)
             	.addInlineField("Players", Integer.toString(Main.inst().getProxy().getPlayers().size()) + "/" + Integer.toString(Main.inst().getProxy().getConfig().getPlayerLimit()))
             	.addInlineField("Uptime", uptime_output)
             	.addInlineField("Memory", Long.toString(Runtime.getRuntime().freeMemory() / 1024 / 1024 ) + "/" + Long.toString(Runtime.getRuntime().totalMemory() / 1024 / 1024) + " MB free")
             	.addInlineField("Servers", Integer.toString(Main.inst().getProxy().getServers().size()))
             	.addInlineField("Server Versions", Main.inst().getProxy().getGameVersion().toString())
             	.addInlineField("Bot Owner", bot_owner)
-            	.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion())
-            	.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd"/*.split("-")[0]*/, "https://cdn.discordapp.com/avatars/215119410103451648/575d90fdda8663b633e36f8b8c06c719.png");
-            	// Send the embed
-            event.getChannel().sendMessage(embed2);
+            	.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion());
+        	
+        	// Set footer
+        	Discord.setFooter(embed);
+            
+        	// Send the embed
+            event.getChannel().sendMessage(embed);
             return;
         }
     }
