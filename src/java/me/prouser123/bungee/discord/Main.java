@@ -14,7 +14,8 @@ import me.prouser123.bstatsplus.bungee.MetricsLite;
 
 // Since we need all the commands here, this is fine.
 import me.prouser123.bungee.discord.commands.*;
-import me.prouser123.bungee.discord.commands.sub.*;
+
+import me.prouser123.bungee.discord.commands.sub.SubCommandLoader;
 
 public class Main extends Plugin {
 
@@ -53,14 +54,14 @@ public class Main extends Plugin {
         // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
         Discord.api.setMessageCacheSize(10, 60*60);
         
+        getLogger().info("Registering commands...");
 		Discord.api.addMessageCreateListener(new ServerInfo());
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
 		Discord.api.addMessageCreateListener(new Players());
 		Discord.api.addMessageCreateListener(new BotInfo());
 		
-		Discord.api.addMessageCreateListener(new DebugSubCommand());
-		Discord.api.addMessageCreateListener(new InviteSubCommand());
+		new SubCommandLoader(Discord.api);
 		
 		// Register Bungee Player Join/Leave Listeners
 		String jlcID = getConfig().getString("join-leave-chat-id");

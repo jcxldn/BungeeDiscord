@@ -8,7 +8,7 @@ import org.javacord.api.listener.message.MessageCreateListener;
 import me.prouser123.bungee.discord.Constants;
 import me.prouser123.bungee.discord.Discord;
 
-public class DebugSubCommand implements MessageCreateListener {
+public class Debug implements MessageCreateListener {
 
 	@Override
     public void onMessageCreate(MessageCreateEvent event) {
