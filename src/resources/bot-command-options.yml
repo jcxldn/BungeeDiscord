@@ -1,0 +1,30 @@
+# Bungee Discord
+# Make sure there is always a space after any :
+
+# Bot Commands and Description Messages (for !bd)
+# Feel free to customize this if you'd like, but you can leave all of this as-is.
+
+# ------------------------------------------------------------------------------------------
+# If you are missing an entry, for example when you update the plugin,
+# you will recieve a warning in the console on startup.
+
+# For the missing entry, the defaults will be used.
+
+# If you want to customize these new commands,
+# you will need to either add the new entries here or delete this file and restart your server.
+# Note that if you delete this file any changes to it will be lost.
+# ------------------------------------------------------------------------------------------
+
+
+# Server Info
+server-info:
+  command: '!serverinfo'
+  description: 'Show server information.'
+# Bot Info
+bot-info:
+  command: '!botinfo'
+  description: 'Show bot information.'
+# Players
+players:
+  command: '!players'
+  description: 'Show players currently on the network and their servers.'

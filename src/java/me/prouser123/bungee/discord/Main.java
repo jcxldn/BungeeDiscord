@@ -22,6 +22,7 @@ public class Main extends Plugin {
 	// Instancing
 	private static Main instance;
 	private static Configuration configuration;
+	private static Configuration botCommandConfiguration;
 	
     public static Main inst() {
     	  return instance;
@@ -29,6 +30,10 @@ public class Main extends Plugin {
     
     public static Configuration getConfig() {
     	return configuration;
+    }
+    
+    public static Configuration getConfigBotCommand() {
+    	return botCommandConfiguration;
     }
 	
 	@Override
@@ -49,7 +54,15 @@ public class Main extends Plugin {
 		try {
 			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
 		} catch (IOException e) {
-			getLogger().severe("[Discord] Error loading config.yml");
+			getLogger().severe("Error loading config.yml");
+		}
+		
+		// Setup bot commands config
+		loadResource(this, "bot-command-options.yml");
+		try {
+			botCommandConfiguration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "bot-command-options.yml"));
+		} catch (IOException e) {
+			getLogger().severe("Error loading bot-command-options.yml");
 		}
         
         new Discord(getConfig().getString("token"));
@@ -59,9 +72,10 @@ public class Main extends Plugin {
         
         getLogger().info("Registering commands...");
 		Discord.api.addMessageCreateListener(new MainCommand());
-		Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
-		Discord.api.addMessageCreateListener(new BotInfo(1, "!botinfo", "Show bot information."));
-		Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
+		
+		// Register customizable bot commands from the config, falling back to hard-coded defaults
+		registerBotCommands();
+		
 		// generate on demand (GoD) - copy owner avatar
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar(3, "!getOwnerAvatar", "GoD.copyOwnerAvatar"));
 		
@@ -78,6 +92,34 @@ public class Main extends Plugin {
 			getLogger().info("Join Leave Chat disabled. Did you put a valid channel ID in the config?");
 			return;
 		}
+	}
+	
+	private void registerBotCommands() {
+		// Attempt to register server-info from the config, falling back to the defaults.
+		if (getConfigBotCommand().contains("server-info")) {
+			Discord.api.addMessageCreateListener(new ServerInfo(0, getConfigBotCommand().getString("server-info.command"), getConfigBotCommand().getString("server-info.description")));	
+		} else {
+				this.getLogger().warning("[Bot Command Options] Missing the server-info path. You will not be able to customize the !serverinfo command.");
+				Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
+		}
+		
+		// Attempt to register bot-info from the config, falling back to the defaults.
+		if (getConfigBotCommand().contains("bot-info")) {
+			Discord.api.addMessageCreateListener(new BotInfo(1, getConfigBotCommand().getString("bot-info.command"), getConfigBotCommand().getString("bot-info.description")));	
+		} else {
+				this.getLogger().warning("[Bot Command Options] Missing the bot-info path. You will not be able to customize the !botinfo command.");
+				Discord.api.addMessageCreateListener(new BotInfo(1, "!botinfo", "Show bot information."));
+		}
+		
+		// Attempt to register players from the config, falling back to the defaults.
+		if (getConfigBotCommand().contains("players")) {
+			Discord.api.addMessageCreateListener(new Players(2, getConfigBotCommand().getString("players.command"), getConfigBotCommand().getString("players.description")));
+		} else {
+				this.getLogger().warning("[Bot Command Options] Missing the players path. You will not be able to customize the !players command.");
+				Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
+		}
+		
+		
 	}
 	
 	public static File loadResource(Plugin plugin, String resource) {
