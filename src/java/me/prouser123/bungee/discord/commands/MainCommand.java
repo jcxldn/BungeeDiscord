@@ -19,10 +19,12 @@ public class MainCommand implements MessageCreateListener {
         if (event.getMessage().getContent().equalsIgnoreCase("!bd")) {
         	
         	EmbedBuilder embed = new EmbedBuilder()
-        			.setTitle("Commands")
-        			.addField("!serverinfo", "Show server information.")
-        			.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.")
-        			.addField("!players", "Show players currently on the network and their servers.");
+        		.setTitle("Commands")
+        		.addField("!serverinfo", "Show server information.")
+        		.addField("!botinfo", "Show bot information.")
+        		.addField("!players", "Show players currently on the network and their servers.")
+        		.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
+        		
         	
         	event.getChannel().sendMessage(embed);
         	

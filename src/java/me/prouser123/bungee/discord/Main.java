@@ -56,6 +56,7 @@ public class Main extends Plugin {
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
 		Discord.api.addMessageCreateListener(new Players());
+		Discord.api.addMessageCreateListener(new BotInfo());
 		
 		// Register Bungee Player Join/Leave Listeners
 		String jlcID = getConfig().getString("join-leave-chat-id");

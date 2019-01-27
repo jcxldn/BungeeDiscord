@@ -4,7 +4,7 @@
 
   <groupId>me.prouser123.bungee</groupId>
   <artifactId>BungeeDiscord</artifactId>
-  <version>1.2.0-DEV</version>
+  <version>1.2.0-DEV-b2</version>
 
   <name>discord</name>
   <url>http://maven.apache.org</url>
