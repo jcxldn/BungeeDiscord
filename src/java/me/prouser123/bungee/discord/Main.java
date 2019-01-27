@@ -14,6 +14,7 @@ import me.prouser123.bstatsplus.bungee.MetricsLite;
 
 // Since we need all the commands here, this is fine.
 import me.prouser123.bungee.discord.commands.*;
+import me.prouser123.bungee.discord.commands.sub.*;
 
 public class Main extends Plugin {
 
@@ -57,6 +58,9 @@ public class Main extends Plugin {
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
 		Discord.api.addMessageCreateListener(new Players());
 		Discord.api.addMessageCreateListener(new BotInfo());
+		
+		Discord.api.addMessageCreateListener(new DebugSubCommand());
+		Discord.api.addMessageCreateListener(new InviteSubCommand());
 		
 		// Register Bungee Player Join/Leave Listeners
 		String jlcID = getConfig().getString("join-leave-chat-id");
