@@ -31,7 +31,7 @@ public class Players implements MessageCreateListener, BaseCommand {
 	
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        if (event.getMessage().getContent().equalsIgnoreCase("!players")) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
         	
         	EmbedBuilder embed2 = new EmbedBuilder()
         			.setTitle("Online Players")

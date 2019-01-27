@@ -16,9 +16,10 @@ public interface BaseCommand {
 	}
 	
 	final String arraySeperator = ":";
+	final String generateOnDemandPrefix = "GoD.";
 	
 	default void addCommandToHelp(base b) {
-		Main.inst().getLogger().info("[BaseCommand@Add2Help]" + b.command);
+		Main.inst().getLogger().info("[BaseCommand@Add2Help] Adding " + b.command);
 		MainCommand.array.add(b.helpPriority, b.command + arraySeperator + b.helpText);
 		Main.inst().getLogger().info("[BaseCommand@Add2Help] " + MainCommand.array);
 	}

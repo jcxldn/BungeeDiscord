@@ -31,7 +31,7 @@ public class ServerInfo implements MessageCreateListener, BaseCommand {
 	
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        if (event.getMessage().getContent().equalsIgnoreCase(this.base.command)) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
         	
         	SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss.SSS");
         	String uptime = formatter.format(ManagementFactory.getRuntimeMXBean().getUptime());

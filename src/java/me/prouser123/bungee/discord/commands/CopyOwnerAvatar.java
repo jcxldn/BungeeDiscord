@@ -3,12 +3,24 @@ package me.prouser123.bungee.discord.commands;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
-public class CopyOwnerAvatar implements MessageCreateListener {
+import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.base.BaseCommand;
+import me.prouser123.bungee.discord.base.BaseCommand.base;
+
+public class CopyOwnerAvatar implements MessageCreateListener, BaseCommand {
 	
-	public static String command = null;
+	private base base;
 	
-	public CopyOwnerAvatar(String command) {
-		CopyOwnerAvatar.command = command;
+	public CopyOwnerAvatar(int piority, String command, String helpText) {
+		
+		base = this.createBase();
+		
+		Main.inst().getLogger().info("[CopyOwnerAvatar@Init] " + piority + " | " + command + " | " + helpText);
+		base.command = command;
+		base.helpPriority = piority;
+		base.helpText = helpText;
+		Main.inst().getLogger().info("[CopyOwnerAvatar@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.addCommandToHelp(base);
 	}
 	
 	/**
@@ -18,7 +30,7 @@ public class CopyOwnerAvatar implements MessageCreateListener {
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         // Check if the message content equals "!copyAvatar"
-        if (event.getMessage().getContent().equalsIgnoreCase(command)) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
 
             // Check if the author is the creator of the bot (you!).
             // You don't want that everyone can set the bot's avatar.

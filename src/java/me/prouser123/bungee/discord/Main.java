@@ -60,9 +60,10 @@ public class Main extends Plugin {
         getLogger().info("Registering commands...");
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
-		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
-		Discord.api.addMessageCreateListener(new Players(1, "!players", "Show players currently on the network and their servers."));
-		Discord.api.addMessageCreateListener(new BotInfo());
+		Discord.api.addMessageCreateListener(new BotInfo(1, "!botinfo", "Show bot information."));
+		Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
+		// generate on demand (GoD) - copy owner avatar
+		Discord.api.addMessageCreateListener(new CopyOwnerAvatar(3, "!getOwnerAvatar", "GoD.copyOwnerAvatar"));
 		
 		new SubCommandLoader(Discord.api);
 		

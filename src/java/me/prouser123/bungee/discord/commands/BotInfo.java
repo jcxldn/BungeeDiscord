@@ -9,13 +9,28 @@ import org.javacord.api.Javacord;
 
 import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.base.BaseCommand;
 import me.prouser123.bungee.discord.Constants;
 
-public class BotInfo implements MessageCreateListener {
+public class BotInfo implements MessageCreateListener, BaseCommand {
+	
+	private base base;
+	
+	public BotInfo(int piority, String command, String helpText) {
+		
+		base = this.createBase();
+		
+		Main.inst().getLogger().info("[BotInfo@Init] " + piority + " | " + command + " | " + helpText);
+		base.command = command;
+		base.helpPriority = piority;
+		base.helpText = helpText;
+		Main.inst().getLogger().info("[BotInfo@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.addCommandToHelp(base);
+	}
 	
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        if (event.getMessage().getContent().equalsIgnoreCase("!botinfo")) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
         	
         	Object[] currentserverroles = Discord.api.getYourself().getRoles(event.getServer().get()).toArray();
         	String roles = "";
