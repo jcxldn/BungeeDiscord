@@ -1,8 +1,5 @@
 package me.prouser123.bungee.discord.base;
 
-import org.javacord.api.event.message.MessageCreateEvent;
-import org.javacord.api.listener.message.MessageCreateListener;
-
 import me.prouser123.bungee.discord.Main;
 
 public class Test implements BaseCommand {//, MessageCreateListener {

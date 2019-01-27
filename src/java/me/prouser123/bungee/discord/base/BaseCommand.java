@@ -5,6 +5,9 @@ import me.prouser123.bungee.discord.commands.MainCommand;
 
 public interface BaseCommand {
 	
+	final String arraySeperator = ":";
+	final String generateOnDemandPrefix = "GoD.";
+	
 	default base createBase() {
 		return new base();
 	}
@@ -14,9 +17,6 @@ public interface BaseCommand {
 		public String helpText = "";
 		public int helpPriority = 0;
 	}
-	
-	final String arraySeperator = ":";
-	final String generateOnDemandPrefix = "GoD.";
 	
 	default void addCommandToHelp(base b) {
 		Main.inst().getLogger().info("[BaseCommand@Add2Help] Adding " + b.command);
