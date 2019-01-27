@@ -23,7 +23,7 @@ public class ServerInfo implements MessageCreateListener, BaseCommand {
 		
 		Main.inst().getLogger().info("[ServerInfo@Init] " + piority + " | " + command + " | " + helpText);
 		base.command = command;
-		//this.base().helpPriority = piority;
+		base.helpPriority = piority;
 		base.helpText = helpText;
 		Main.inst().getLogger().info("[ServerInfo@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
 		this.addCommandToHelp(base);

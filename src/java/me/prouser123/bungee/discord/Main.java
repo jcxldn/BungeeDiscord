@@ -61,7 +61,7 @@ public class Main extends Plugin {
 		Discord.api.addMessageCreateListener(new MainCommand());
 		Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
 		Discord.api.addMessageCreateListener(new CopyOwnerAvatar("!getOwnerAvatar"));
-		Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
+		Discord.api.addMessageCreateListener(new Players(1, "!players", "Show players currently on the network and their servers."));
 		Discord.api.addMessageCreateListener(new BotInfo());
 		
 		new SubCommandLoader(Discord.api);
