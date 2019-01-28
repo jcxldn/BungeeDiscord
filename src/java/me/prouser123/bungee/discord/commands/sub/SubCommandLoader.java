@@ -8,7 +8,7 @@ public class SubCommandLoader {
 	
 	public SubCommandLoader(DiscordApi api) {
 		Main.inst().getLogger().info("Registering sub-commands...");
-		api.addMessageCreateListener(new Debug());
-		api.addMessageCreateListener(new Invite());
+		api.addMessageCreateListener(new Invite(0, "!bd invite", "Show a bot invite link to add the bot to other servers."));
+		api.addMessageCreateListener(new Debug(1, "!bd debug", "Show debug information."));
 	}
 }

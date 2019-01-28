@@ -16,9 +16,11 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
 	
 	//public static EmbedBuilder CommandEmbed = null;
 	public static ArrayList<String> array;
+	public static ArrayList<String> subArray;
 	
 	public MainCommand() {
 		array = new ArrayList<String>();
+		subArray = new ArrayList<String>();
 		Main.inst().getLogger().info("[MainCommand@Init] Loaded MainCommand and Array");
 		Main.inst().getLogger().info("[MainCommand@Init] Arr: " + array);
 	}
@@ -32,27 +34,6 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
         // Check if the message content equals "!bd"
         if (event.getMessage().getContent().equalsIgnoreCase("!bd")) {
         	
-        	EmbedBuilder embed = new EmbedBuilder().setTitle("Commands");
-        	
-        	//Main.inst().getLogger().info(array.toString());
-        	for (String command: array) {
-        		String[] split = command.split(this.arraySeperator);
-        		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
-        		
-        		if (split[1].startsWith(this.generateOnDemandPrefix)) {
-        			String[] splitGOD = split[1].split(this.generateOnDemandPrefix);
-        			Main.inst().getLogger().info("[MainCommand@OnMessage.GoD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
-        			
-        			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
-        				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
-        				embed.addField(split[0], "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
-        				//return;
-        			}
-        		} else {
-            		embed.addField(split[0], split[1]);
-        		}
-        	}
-        	
         	//EmbedBuilder embed = new EmbedBuilder()
         	//	.setTitle("Commands");
         	//
@@ -61,8 +42,9 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
         		//.addField("!players", "Show players currently on the network and their servers.")
         		//.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
         		
-        	
-        	event.getChannel().sendMessage(embed);
+        	// Create and send the Main Command Embed
+        	event.getChannel().sendMessage(this.createMainCommandEmbed(event));
+        	event.getChannel().sendMessage(this.createSubCommandEmbed(event));
         	
         	
         	EmbedBuilder embed2 = new EmbedBuilder();
@@ -77,6 +59,58 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
         	event.getChannel().sendMessage(embed2);
             return;
         }
+    }
+    
+    private EmbedBuilder createMainCommandEmbed(MessageCreateEvent event) {
+    	EmbedBuilder embed = new EmbedBuilder().setTitle("Commands");
+    	
+    	//Main.inst().getLogger().info(array.toString());
+    	for (String command: array) {
+    		String[] split = command.split(this.arraySeperator);
+    		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
+    		
+    		if (split[1].startsWith(this.generateOnDemandPrefix)) {
+    			String[] splitGOD = split[1].split(this.generateOnDemandPrefix);
+    			Main.inst().getLogger().info("[MainCommand@OnMessage.GoD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
+    			
+    			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
+    				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
+    				embed.addField(split[0], "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
+    				//return;
+    			}
+    		} else {
+        		embed.addField(split[0], split[1]);
+    		}
+    	}
+    	
+    	// return the embed
+    	return embed;
+    }
+    
+    private EmbedBuilder createSubCommandEmbed(MessageCreateEvent event) {
+    	EmbedBuilder embed = new EmbedBuilder().setTitle("Sub-Commands");
+    	
+    	//Main.inst().getLogger().info(array.toString());
+    	for (String command: subArray) {
+    		String[] split = command.split(this.arraySeperator);
+    		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
+    		
+    		if (split[1].startsWith(this.generateOnDemandPrefix)) {
+    			String[] splitGOD = split[1].split(this.generateOnDemandPrefix);
+    			Main.inst().getLogger().info("[MainCommand@OnMessage.GoD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
+    			
+    			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
+    				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
+    				embed.addField(split[0], "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
+    				//return;
+    			}
+    		} else {
+        		embed.addField(split[0], split[1]);
+    		}
+    	}
+    	
+    	// return the embed
+    	return embed;
     }
 
 }

@@ -7,12 +7,29 @@ import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.prouser123.bungee.discord.Constants;
 import me.prouser123.bungee.discord.Discord;
+import me.prouser123.bungee.discord.Main;
+import me.prouser123.bungee.discord.base.BaseCommand.base;
+import me.prouser123.bungee.discord.base.BaseSubCommand;
 
-public class Debug implements MessageCreateListener {
+public class Debug implements MessageCreateListener, BaseSubCommand {
+	
+	private base base;
+
+	public Debug(int piority, String command, String helpText) {
+
+		base = this.createBase();
+
+		Main.inst().getLogger().info("[Debug@Init] " + piority + " | " + command + " | " + helpText);
+		base.command = command;
+		base.helpPriority = piority;
+		base.helpText = helpText;
+		Main.inst().getLogger().info("[Debug@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.addCommandToHelp(base);
+	}
 
 	@Override
     public void onMessageCreate(MessageCreateEvent event) {
-        if (event.getMessage().getContent().equalsIgnoreCase("!bd debug")) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
             
         	EmbedBuilder embed = new EmbedBuilder()
             		.setAuthor("BungeeDiscord Debug Information", Constants.url, Constants.authorIconURL)
