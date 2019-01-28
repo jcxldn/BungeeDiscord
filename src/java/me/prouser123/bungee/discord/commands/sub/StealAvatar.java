@@ -1,17 +1,16 @@
-package me.prouser123.bungee.discord.commands;
+package me.prouser123.bungee.discord.commands.sub;
 
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.prouser123.bungee.discord.Main;
-import me.prouser123.bungee.discord.base.BaseCommand;
-import me.prouser123.bungee.discord.base.BaseCommand.base;
+import me.prouser123.bungee.discord.base.BaseSubCommand;
 
-public class CopyOwnerAvatar implements MessageCreateListener, BaseCommand {
+public class StealAvatar implements MessageCreateListener, BaseSubCommand {
 	
 	private base base;
 	
-	public CopyOwnerAvatar(int piority, String command, String helpText) {
+	public StealAvatar(int piority, String command, String helpText) {
 		
 		base = this.createBase();
 		

@@ -101,7 +101,7 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
     			
     			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
     				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
-    				embed.addField(split[0], "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
+    				embed.addField(split[0], "Replace my avatar with my owner's  (" + Discord.getBotOwner(event) + ") avatar.");
     				//return;
     			}
     		} else {
