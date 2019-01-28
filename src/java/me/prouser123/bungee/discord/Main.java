@@ -130,7 +130,7 @@ public class Main extends Plugin {
 			Main.inst().getLogger().info("Registering sub-commands...");
 
 			// generate on demand (GoD) - copy owner avatar
-			Discord.api.addMessageCreateListener(new StealAvatar(0, "!bd steal", "GoD.copyOwnerAvatar"));
+			Discord.api.addMessageCreateListener(new StealAvatar(0, "!bd steal", "GoD.stealAvatar"));
 			Discord.api.addMessageCreateListener(new Invite(1, "!bd invite", "Show a bot invite link to add the bot to other servers."));
 			Discord.api.addMessageCreateListener(new Debug(2, "!bd debug", "Show debug information."));
 		}

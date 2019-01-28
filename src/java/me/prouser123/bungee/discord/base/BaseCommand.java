@@ -6,7 +6,6 @@ import me.prouser123.bungee.discord.commands.MainCommand;
 public interface BaseCommand {
 	
 	final String arraySeperator = ":";
-	final String generateOnDemandPrefix = "GoD.";
 	
 	default base createBase() {
 		return new base();

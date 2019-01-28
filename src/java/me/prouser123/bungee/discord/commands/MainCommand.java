@@ -11,8 +11,9 @@ import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.JoinLeave;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseCommand;
+import me.prouser123.bungee.discord.base.GenerateOnDemand;
 
-public class MainCommand implements MessageCreateListener, BaseCommand {
+public class MainCommand implements MessageCreateListener, BaseCommand, GenerateOnDemand {
 	
 	//public static EmbedBuilder CommandEmbed = null;
 	public static ArrayList<String> array;
@@ -69,18 +70,16 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
     		String[] split = command.split(this.arraySeperator);
     		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
     		
-    		if (split[1].startsWith(this.generateOnDemandPrefix)) {
-    			String[] splitGOD = split[1].split(this.generateOnDemandPrefix);
-    			Main.inst().getLogger().info("[MainCommand@OnMessage.GoD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
-    			
-    			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
-    				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
-    				embed.addField(split[0], "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
-    				//return;
-    			}
-    		} else {
-        		embed.addField(split[0], split[1]);
-    		}
+    		// Currently not required as there are no main commands that require it.
+    		// Instead we will just add the field.
+    		
+    		//if (this.isGoD(split[1])) {
+    		//	this.runGoD(split, embed, event);
+    		//} else {
+        	//	embed.addField(split[0], split[1]);
+    		//}
+
+        	embed.addField(split[0], split[1]);
     	}
     	
     	// return the embed
@@ -95,15 +94,8 @@ public class MainCommand implements MessageCreateListener, BaseCommand {
     		String[] split = command.split(this.arraySeperator);
     		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
     		
-    		if (split[1].startsWith(this.generateOnDemandPrefix)) {
-    			String[] splitGOD = split[1].split(this.generateOnDemandPrefix);
-    			Main.inst().getLogger().info("[MainCommand@OnMessage.GoD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
-    			
-    			if (splitGOD[1].equalsIgnoreCase("copyOwnerAvatar")) {
-    				Main.inst().getLogger().info("[MainCommand@OnMessage.GoD.copyOwnerAvatar]");
-    				embed.addField(split[0], "Replace my avatar with my owner's  (" + Discord.getBotOwner(event) + ") avatar.");
-    				//return;
-    			}
+    		if (this.isGoD(split[1])) {
+    			this.runGoD(split, embed, event);
     		} else {
         		embed.addField(split[0], split[1]);
     		}
