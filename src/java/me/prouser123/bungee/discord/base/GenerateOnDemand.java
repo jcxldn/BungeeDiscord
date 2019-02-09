@@ -11,11 +11,7 @@ public interface GenerateOnDemand {
 	final String GoDPrefix = "GoD.";
 	
 	default boolean isGoD(String helpMessage) {
-		if(helpMessage.startsWith(this.GoDPrefix)) {
-			return true;
-		} else {
-			return false;
-		}
+		return (helpMessage.startsWith(this.GoDPrefix));
 	}
 	
 	default void runGoD(String[] split, EmbedBuilder embed, MessageCreateEvent event) {
