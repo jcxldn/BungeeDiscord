@@ -1,12 +1,14 @@
 package me.prouser123.bungee.discord;
 
+import java.util.logging.Level;
+
 public class DebugLogger {
 	
 	private boolean debugEnabled = false;
 	
 	public void info(String message) {
 		if (debugEnabled) {
-			Main.inst().getLogger().info("[DEBUG] " + message);
+			Main.inst().getProxy().getLogger().log(Level.INFO, "[" + Main.inst().getDescription().getName() + ".DEBUG] " + message);
 		}
 	}
 	
