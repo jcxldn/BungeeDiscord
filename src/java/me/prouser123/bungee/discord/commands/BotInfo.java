@@ -17,12 +17,7 @@ public class BotInfo implements MessageCreateListener, BaseCommand {
 	private base base;
 	
 	public BotInfo(int piority, String command, String helpText) {
-		
-		base = this.createBase();
-		
-		this.base.add(piority, command, helpText);
-		this.debugInit(piority, command, helpText, base);
-		this.addCommandToHelp(base);
+		base = this.easyBaseSetup(piority, command, helpText);
 	}
 	
     @Override

@@ -16,12 +16,7 @@ public class Debug implements MessageCreateListener, BaseSubCommand {
 	private base base;
 
 	public Debug(int piority, String command, String helpText) {
-		
-		base = this.createBase();
-		
-		this.base.add(piority, command, helpText);
-		this.debugInit(piority, command, helpText, base);
-		this.addCommandToHelp(base);
+		base = this.easyBaseSetup(piority, command, helpText);
 	}
 
 	@Override
