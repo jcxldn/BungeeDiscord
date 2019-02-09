@@ -1,14 +1,16 @@
-package me.prouser123.bungee.discord;
+package me.prouser123.bungee.discord.commands.sub;
 
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
-public class CopyOwnerAvatar implements MessageCreateListener {
+import me.prouser123.bungee.discord.base.BaseSubCommand;
+
+public class StealAvatar implements MessageCreateListener, BaseSubCommand {
 	
-	public static String command = null;
+	private base base;
 	
-	public CopyOwnerAvatar(String command) {
-		CopyOwnerAvatar.command = command;
+	public StealAvatar(int piority, String command, String helpText) {
+		base = this.easyBaseSetup(piority, command, helpText);
 	}
 	
 	/**
@@ -18,7 +20,7 @@ public class CopyOwnerAvatar implements MessageCreateListener {
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         // Check if the message content equals "!copyAvatar"
-        if (event.getMessage().getContent().equalsIgnoreCase(command)) {
+        if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
 
             // Check if the author is the creator of the bot (you!).
             // You don't want that everyone can set the bot's avatar.
@@ -37,7 +39,6 @@ public class CopyOwnerAvatar implements MessageCreateListener {
                     });
             return;
         }
-        return;
     }
 
 }
