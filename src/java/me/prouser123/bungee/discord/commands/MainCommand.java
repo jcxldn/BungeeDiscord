@@ -22,8 +22,8 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
 	public MainCommand() {
 		array = new ArrayList<String>();
 		subArray = new ArrayList<String>();
-		Main.inst().getLogger().info("[MainCommand@Init] Loaded MainCommand and Array");
-		Main.inst().getLogger().info("[MainCommand@Init] Arr: " + array);
+		Main.inst().getDebugLogger().info("[MainCommand@Init] Loaded MainCommand and Array");
+		Main.inst().getDebugLogger().info("[MainCommand@Init] Arr: " + array);
 	}
 	
 	/**

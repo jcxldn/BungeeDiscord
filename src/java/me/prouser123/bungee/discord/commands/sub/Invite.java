@@ -12,14 +12,11 @@ public class Invite implements MessageCreateListener, BaseSubCommand {
 	private base base;
 
 	public Invite(int piority, String command, String helpText) {
-
+		
 		base = this.createBase();
-
-		Main.inst().getLogger().info("[Invite@Init] " + piority + " | " + command + " | " + helpText);
-		base.command = command;
-		base.helpPriority = piority;
-		base.helpText = helpText;
-		Main.inst().getLogger().info("[Invite@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		
+		this.base.add(piority, command, helpText);
+		this.debugInit(piority, command, helpText, base);
 		this.addCommandToHelp(base);
 	}
 

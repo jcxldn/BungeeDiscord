@@ -19,14 +19,12 @@ public class Players implements MessageCreateListener, BaseCommand {
 	
 	public Players(int piority, String command, String helpText) {
 		
-		base = this.createBase();
-		
-		Main.inst().getLogger().info("[Players@Init] " + piority + " | " + command + " | " + helpText);
-		base.command = command;
-		base.helpPriority = piority;
-		base.helpText = helpText;
-		Main.inst().getLogger().info("[Players@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
-		this.addCommandToHelp(base);
+		//base = this.createBase();
+		//
+		//this.base.add(piority, command, helpText);
+		//this.debugInit(piority, command, helpText, base);
+		//this.addCommandToHelp(base);
+		base = this.easyBaseSetup(piority, command, helpText);
 	}
 	
     @Override

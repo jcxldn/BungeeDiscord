@@ -14,11 +14,8 @@ public class StealAvatar implements MessageCreateListener, BaseSubCommand {
 		
 		base = this.createBase();
 		
-		Main.inst().getLogger().info("[CopyOwnerAvatar@Init] " + piority + " | " + command + " | " + helpText);
-		base.command = command;
-		base.helpPriority = piority;
-		base.helpText = helpText;
-		Main.inst().getLogger().info("[CopyOwnerAvatar@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		this.base.add(piority, command, helpText);
+		this.debugInit(piority, command, helpText, base);
 		this.addCommandToHelp(base);
 	}
 	

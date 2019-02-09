@@ -22,6 +22,7 @@ public class Main extends Plugin {
 	private static Main instance;
 	private static Configuration configuration;
 	private static Configuration botCommandConfiguration;
+	private static DebugLogger debugLogger;
 	
     public static Main inst() {
     	  return instance;
@@ -33,6 +34,10 @@ public class Main extends Plugin {
     
     public static Configuration getConfigBotCommand() {
     	return botCommandConfiguration;
+    }
+    
+    public DebugLogger getDebugLogger() {
+    	return debugLogger;
     }
 	
 	@Override
@@ -63,6 +68,9 @@ public class Main extends Plugin {
 		} catch (IOException e) {
 			getLogger().severe("Error loading bot-command-options.yml");
 		}
+		
+		// Setup Debug Logging
+		debugLogger = new DebugLogger();
         
         new Discord(getConfig().getString("token"));
         

@@ -16,14 +16,11 @@ public class Debug implements MessageCreateListener, BaseSubCommand {
 	private base base;
 
 	public Debug(int piority, String command, String helpText) {
-
+		
 		base = this.createBase();
-
-		Main.inst().getLogger().info("[Debug@Init] " + piority + " | " + command + " | " + helpText);
-		base.command = command;
-		base.helpPriority = piority;
-		base.helpText = helpText;
-		Main.inst().getLogger().info("[Debug@Init] BASE() | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
+		
+		this.base.add(piority, command, helpText);
+		this.debugInit(piority, command, helpText, base);
 		this.addCommandToHelp(base);
 	}
 
