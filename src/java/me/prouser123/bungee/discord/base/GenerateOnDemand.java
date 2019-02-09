@@ -23,7 +23,7 @@ public interface GenerateOnDemand {
 	
 	class validCommands {
 		
-		static void check(String[] split, String[] splitGOD, EmbedBuilder embed, MessageCreateEvent event) {
+		private static void check(String[] split, String[] splitGOD, EmbedBuilder embed, MessageCreateEvent event) {
 			if (splitGOD[1].equalsIgnoreCase("stealAvatar")) {
 				GenerateOnDemand.validCommands.stealAvatar(split, embed, event);
 			} else {
@@ -31,7 +31,7 @@ public interface GenerateOnDemand {
 			}
 		}
 		
-		static void stealAvatar(String[] split, EmbedBuilder embed, MessageCreateEvent event) {
+		private static void stealAvatar(String[] split, EmbedBuilder embed, MessageCreateEvent event) {
 			Main.inst().getDebugLogger().info("Running [runGOD.stealAvatar]");
 			embed.addField(split[0], "Replace my avatar with my owner's  (" + Discord.getBotOwner(event) + ") avatar.");
 		}
