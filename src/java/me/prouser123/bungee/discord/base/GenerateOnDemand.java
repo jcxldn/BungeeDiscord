@@ -22,7 +22,7 @@ public interface GenerateOnDemand {
 	
 	default void runGoD(String[] split, EmbedBuilder embed, MessageCreateEvent event) {
 		String[] splitGOD = split[1].split(this.GoDPrefix);
-		Main.inst().getLogger().info("[runGOD] " + Arrays.toString(splitGOD) + "ITEM1: " + splitGOD[1]);
+		Main.inst().getDebugLogger().info("[runGOD] " + "ITEM1: " + splitGOD[1]);
 		GenerateOnDemand.validCommands.check(split, splitGOD, embed, event);
 	}
 	
@@ -38,7 +38,7 @@ public interface GenerateOnDemand {
 		}
 		
 		static void stealAvatar(String[] split, EmbedBuilder embed, MessageCreateEvent event) {
-			Main.inst().getLogger().info("[runGOD.stealAvatar]");
+			Main.inst().getDebugLogger().info("Running [runGOD.stealAvatar]");
 			embed.addField(split[0], "Replace my avatar with my owner's  (" + Discord.getBotOwner(event) + ") avatar.");
 		}
 	}

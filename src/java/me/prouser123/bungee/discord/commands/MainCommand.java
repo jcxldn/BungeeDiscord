@@ -22,6 +22,8 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
 	public MainCommand() {
 		array = new ArrayList<String>();
 		subArray = new ArrayList<String>();
+		
+		// Debug information
 		Main.inst().getDebugLogger().info("[MainCommand@Init] Loaded MainCommand and Array");
 		Main.inst().getDebugLogger().info("[MainCommand@Init] Arr: " + array);
 	}
@@ -68,7 +70,9 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
     	//Main.inst().getLogger().info(array.toString());
     	for (String command: array) {
     		String[] split = command.split(this.arraySeperator);
-    		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
+    		
+    		// Debug information
+    		Main.inst().getDebugLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
     		
     		// Currently not required as there are no main commands that require it.
     		// Instead we will just add the field.
@@ -92,7 +96,9 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
     	//Main.inst().getLogger().info(array.toString());
     	for (String command: subArray) {
     		String[] split = command.split(this.arraySeperator);
-    		Main.inst().getLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
+    		
+    		// Debug information
+    		Main.inst().getDebugLogger().info("[MainCommand@OnMessage] Command: " + split[0] + ", HelpText: " + split[1]);
     		
     		if (this.isGoD(split[1])) {
     			this.runGoD(split, embed, event);

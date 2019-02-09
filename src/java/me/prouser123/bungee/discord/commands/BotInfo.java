@@ -36,13 +36,13 @@ public class BotInfo implements MessageCreateListener, BaseCommand {
         		
         		// Remove the initial @ from the role name to avoid role spam
         		if (role.startsWith(("@"))) {
-        			Main.inst().getLogger().info("StartsWith @");
+        			Main.inst().getDebugLogger().info("StartsWith @ - Removing...");
         			role = role.replace("@", "");
         		}
         		
         		// Adds to the list of roles
         		roles += role + " ";
-        		Main.inst().getLogger().info(role);
+        		Main.inst().getDebugLogger().info("Has role: " + role);
         	}
         	
         	EmbedBuilder embed = new EmbedBuilder()
