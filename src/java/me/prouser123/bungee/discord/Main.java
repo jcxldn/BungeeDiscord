@@ -111,17 +111,9 @@ public class Main extends Plugin {
 					Discord.api.addMessageCreateListener(new ServerInfo(0, "!serverinfo", "Show server information."));
 			}
 			
-			// Attempt to register bot-info from the config, falling back to the defaults.
-			if (getConfigBotCommand().contains("bot-info")) {
-				Discord.api.addMessageCreateListener(new BotInfo(1, getConfigBotCommand().getString("bot-info.command"), getConfigBotCommand().getString("bot-info.description")));	
-			} else {
-					Main.inst().getLogger().warning("[Bot Command Options] Missing the bot-info path. You will not be able to customize the !botinfo command.");
-					Discord.api.addMessageCreateListener(new BotInfo(1, "!botinfo", "Show bot information."));
-			}
-			
 			// Attempt to register players from the config, falling back to the defaults.
 			if (getConfigBotCommand().contains("players")) {
-				Discord.api.addMessageCreateListener(new Players(2, getConfigBotCommand().getString("players.command"), getConfigBotCommand().getString("players.description")));
+				Discord.api.addMessageCreateListener(new Players(1, getConfigBotCommand().getString("players.command"), getConfigBotCommand().getString("players.description")));
 			} else {
 					Main.inst().getLogger().warning("[Bot Command Options] Missing the players path. You will not be able to customize the !players command.");
 					Discord.api.addMessageCreateListener(new Players(2, "!players", "Show players currently on the network and their servers."));
@@ -134,9 +126,10 @@ public class Main extends Plugin {
 			Main.inst().getLogger().info("Registering sub-commands...");
 
 			// generate on demand (GoD) - copy owner avatar
-			Discord.api.addMessageCreateListener(new StealAvatar(0, "!bd steal", "GoD.stealAvatar"));
-			Discord.api.addMessageCreateListener(new Invite(1, "!bd invite", "Show a bot invite link to add the bot to other servers."));
-			Discord.api.addMessageCreateListener(new Debug(2, "!bd debug", "Show debug information."));
+			Discord.api.addMessageCreateListener(new BotInfo(0, "!bd botinfo", "Show bot information."));
+			Discord.api.addMessageCreateListener(new StealAvatar(1, "!bd steal", "GoD.stealAvatar"));
+			Discord.api.addMessageCreateListener(new Invite(2, "!bd invite", "Show a bot invite link to add the bot to other servers."));
+			Discord.api.addMessageCreateListener(new Debug(3, "!bd debug", "Show debug information."));
 		}
 	}
 	

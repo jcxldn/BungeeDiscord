@@ -1,4 +1,4 @@
-package me.prouser123.bungee.discord.commands;
+package me.prouser123.bungee.discord.commands.sub;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
@@ -9,10 +9,10 @@ import org.javacord.api.Javacord;
 
 import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
-import me.prouser123.bungee.discord.base.BaseCommand;
+import me.prouser123.bungee.discord.base.BaseSubCommand;
 import me.prouser123.bungee.discord.Constants;
 
-public class BotInfo implements MessageCreateListener, BaseCommand {
+public class BotInfo implements MessageCreateListener, BaseSubCommand {
 	
 	private base base;
 	
