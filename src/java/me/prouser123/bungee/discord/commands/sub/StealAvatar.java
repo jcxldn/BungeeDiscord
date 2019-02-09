@@ -3,7 +3,6 @@ package me.prouser123.bungee.discord.commands.sub;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
-import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseSubCommand;
 
 public class StealAvatar implements MessageCreateListener, BaseSubCommand {

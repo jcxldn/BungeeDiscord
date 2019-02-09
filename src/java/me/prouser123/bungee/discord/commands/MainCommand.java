@@ -1,13 +1,11 @@
 package me.prouser123.bungee.discord.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
-import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.JoinLeave;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseCommand;

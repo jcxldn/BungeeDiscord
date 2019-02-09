@@ -1,7 +1,5 @@
 package me.prouser123.bungee.discord.base;
 
-import java.util.Arrays;
-
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 

@@ -4,7 +4,6 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.prouser123.bungee.discord.Discord;
-import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseSubCommand;
 
 public class Invite implements MessageCreateListener, BaseSubCommand {
