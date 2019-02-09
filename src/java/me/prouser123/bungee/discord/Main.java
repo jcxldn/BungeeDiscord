@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.MetricsLite;
-import me.prouser123.bungee.discord.base.Test;
 // Since we need all the commands here, this is fine.
 import me.prouser123.bungee.discord.commands.*;
 import me.prouser123.bungee.discord.commands.sub.*;
@@ -46,9 +45,6 @@ public class Main extends Plugin {
 		instance = this;
 		
 		getLogger().info("Welcome!");
-		
-		Test t = new Test();
-		t.new Test2();
 		
 		// Start bStats
 		new MetricsLite(this, true);
