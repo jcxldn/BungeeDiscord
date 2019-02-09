@@ -47,7 +47,7 @@ public class Main extends Plugin {
 		getLogger().info("Welcome!");
 		
 		// Start bStats
-		new MetricsLite(this, true);
+		new MetricsLite(this);
 		
 		// Setup config
 		loadResource(this, "config.yml");

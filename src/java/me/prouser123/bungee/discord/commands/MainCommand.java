@@ -35,14 +35,6 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
         // Check if the message content equals "!bd"
         if (event.getMessage().getContent().equalsIgnoreCase("!bd")) {
         	
-        	//EmbedBuilder embed = new EmbedBuilder()
-        	//	.setTitle("Commands");
-        	//
-        		//.addField("!serverinfo", "Show server information.")
-        		//.addField("!botinfo", "Show bot information.")
-        		//.addField("!players", "Show players currently on the network and their servers.")
-        		//.addField("!getOwnerAvatar", "Replace my avatar with the bot owner's  (" + Discord.getBotOwner(event) + ") avatar.");
-        		
         	// Create and send the Main Command Embed
         	event.getChannel().sendMessage(this.createMainCommandEmbed(event));
         	event.getChannel().sendMessage(this.createSubCommandEmbed(event));
@@ -65,7 +57,6 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
     private EmbedBuilder createMainCommandEmbed(MessageCreateEvent event) {
     	EmbedBuilder embed = new EmbedBuilder().setTitle("Commands");
     	
-    	//Main.inst().getLogger().info(array.toString());
     	for (String command: array) {
     		String[] split = command.split(this.arraySeperator);
     		
@@ -91,7 +82,6 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
     private EmbedBuilder createSubCommandEmbed(MessageCreateEvent event) {
     	EmbedBuilder embed = new EmbedBuilder().setTitle("Sub-Commands");
     	
-    	//Main.inst().getLogger().info(array.toString());
     	for (String command: subArray) {
     		String[] split = command.split(this.arraySeperator);
     		
