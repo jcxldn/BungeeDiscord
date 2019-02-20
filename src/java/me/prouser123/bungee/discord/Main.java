@@ -71,21 +71,24 @@ public class Main extends Plugin {
         new Discord(getConfig().getString("token"));
         
         if (Discord.api != null) {
-        	
-            // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
-            Discord.api.setMessageCacheSize(10, 60*60);
-    		
-    		// Register customizable bot commands from the config, falling back to hard-coded defaults
-    		Main.registerListeners.botCommands();
-    		Main.registerListeners.subCommands();
-    		
-    		// Register Bungee Player Join/Leave Listeners
-    		Main.registerListeners.playerJoinLeave();
-    		
+        	this.setLocalBotOptions();
         }
         
 		// Register in-game /bd command
         getProxy().getPluginManager().registerCommand(this, new InGameCommand());
+	}
+	
+	public void setLocalBotOptions() {
+        // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
+        Discord.api.setMessageCacheSize(10, 60*60);
+		
+		// Register customizable bot commands from the config, falling back to hard-coded defaults
+		Main.registerListeners.botCommands();
+		Main.registerListeners.subCommands();
+		
+		// Register Bungee Player Join/Leave Listeners
+		Main.registerListeners.playerJoinLeave();
+		
 	}
 	
 	private static class registerListeners {
@@ -159,6 +162,10 @@ public class Main extends Plugin {
         }
         return resourceFile;
     }
+	
+	public static void saveResource(Plugin plugin, String resourcePath, Configuration config) throws IOException {
+        ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(plugin.getDataFolder(), resourcePath));
+	}
 	
 	@Override
 	public void onDisable() {

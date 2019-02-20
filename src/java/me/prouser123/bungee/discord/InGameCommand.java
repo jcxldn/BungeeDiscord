@@ -1,5 +1,6 @@
 package me.prouser123.bungee.discord;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import net.md_5.bungee.api.ChatColor;
@@ -39,8 +40,27 @@ public class InGameCommand extends Command {
         	// 2 command arguments (e.g. /bd token <token>)
         	if (args.length == 2) {
         		sender.sendMessage(new TextComponent("token: " + args[1]));
-                sender.sendMessage(new TextComponent(ChatColor.WHITE + "[" + this.title + ChatColor.WHITE + "] " + ChatColor.GRAY));
-        	
+        		
+                new Discord(args[1]);
+                if (Discord.api != null) {
+                    Main.inst().setLocalBotOptions();
+                    Main.inst().getLogger().info(Main.inst().getConfig().getString("token"));
+                    
+                    // Attempt to set the new token and save the file
+                    try {
+
+                        Main.inst().getConfig().set("token", args[1]);
+						Main.saveResource(Main.inst(), "config.yml", Main.inst().getConfig());
+						sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
+					} catch (IOException e) {
+						sender.sendMessage(new TextComponent(this.prefix + ChatColor.RED + "Error saving config.yml. See console trace for details."));
+						e.printStackTrace();
+					}
+                    
+                    Main.inst().getLogger().info(Main.inst().getConfig().getString("token"));
+                    sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName()));
+                }
+                
             // User only put /bd token (1 command argument)
         	} else {
                 sender.sendMessage(new TextComponent(ChatColor.RED + "Please specify a bot token with: /bd token <bot token>"));
@@ -69,5 +89,6 @@ public class InGameCommand extends Command {
 	public String invalidCommandText = "Invalid command.";
 	
 	public String title = (ChatColor.DARK_AQUA + "Bungee" + ChatColor.LIGHT_PURPLE + "Discord");
+	public String prefix = (ChatColor.WHITE + "[" + this.title + ChatColor.WHITE + "] " + ChatColor.GRAY);
 	
 }
