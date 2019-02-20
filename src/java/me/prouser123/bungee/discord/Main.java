@@ -70,15 +70,22 @@ public class Main extends Plugin {
         
         new Discord(getConfig().getString("token"));
         
-        // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
-        Discord.api.setMessageCacheSize(10, 60*60);
-		
-		// Register customizable bot commands from the config, falling back to hard-coded defaults
-		Main.registerListeners.botCommands();
-		Main.registerListeners.subCommands();
-		
-		// Register Bungee Player Join/Leave Listeners
-		Main.registerListeners.playerJoinLeave();
+        if (Discord.api != null) {
+        	
+            // Cache a maximum of 10 messages per channel for and remove messages older than 1 hour
+            Discord.api.setMessageCacheSize(10, 60*60);
+    		
+    		// Register customizable bot commands from the config, falling back to hard-coded defaults
+    		Main.registerListeners.botCommands();
+    		Main.registerListeners.subCommands();
+    		
+    		// Register Bungee Player Join/Leave Listeners
+    		Main.registerListeners.playerJoinLeave();
+    		
+        }
+        
+		// Register in-game /bd command
+        getProxy().getPluginManager().registerCommand(this, new InGameCommand());
 	}
 	
 	private static class registerListeners {

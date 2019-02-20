@@ -31,7 +31,10 @@ public class Discord {
 		try {
 			api = new DiscordApiBuilder().setToken(token).login().join();
 		} catch (CompletionException IllegalStateException) {
-			Main.inst().getLogger().info("Connection Error. Did you put a valid token in the config?");
+			Main.inst().getLogger().warning("Connection Error. Did you put a valid token in the config?");
+			
+			// Return without running the rest of the setup.
+			return;
 		}
 		
         // Print the invite url of the bot
