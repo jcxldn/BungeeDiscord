@@ -34,7 +34,21 @@ public class InGameCommand extends Command {
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd" + ChatColor.GRAY + " - " + ChatColor.GOLD + "View plugin and status information"));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd help" + ChatColor.GRAY + " - " + ChatColor.GOLD + "This page."));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd token" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the bot token."));
-        	
+
+            
+        // bd save command
+        } else if (args[0].equalsIgnoreCase("save")) {
+        	if (args.length == 1) {
+            	Main.getMCM().write();
+                sender.sendMessage(new TextComponent(this.title + ChatColor.GREEN + " Saved!"));
+        	} else if (args[1].equalsIgnoreCase("token")) {
+        		Main.getMCM().setToken(args[2]);
+        	} else if (args[1].equalsIgnoreCase("jlcid")) {
+        		Main.getMCM().setJoinLeaveChatId(args[2]);
+        	} else if (args[1].equalsIgnoreCase("debug")) {
+        		Main.getMCM().setDebugEnabled(Boolean.parseBoolean(args[2]));
+        	}
+            	
         // bd token command
         } else if (args[0].equalsIgnoreCase("token")) {
         	// 2 command arguments (e.g. /bd token <token>)
@@ -44,20 +58,14 @@ public class InGameCommand extends Command {
                 new Discord(args[1]);
                 if (Discord.api != null) {
                     Main.inst().setLocalBotOptions();
-                    Main.inst().getLogger().info(Main.inst().getConfig().getString("token"));
+                    Main.inst().getLogger().info(Main.getMCM().getToken());
                     
                     // Attempt to set the new token and save the file
-                    try {
+                    Main.getMCM().setToken(args[1]);
+                    Main.getMCM().write();
+					sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
 
-                        Main.inst().getConfig().set("token", args[1]);
-						Main.saveResource(Main.inst(), "config.yml", Main.inst().getConfig());
-						sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
-					} catch (IOException e) {
-						sender.sendMessage(new TextComponent(this.prefix + ChatColor.RED + "Error saving config.yml. See console trace for details."));
-						e.printStackTrace();
-					}
-                    
-                    Main.inst().getLogger().info(Main.inst().getConfig().getString("token"));
+                    Main.inst().getLogger().info(Main.getMCM().getToken());
                     sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName()));
                 }
                 

@@ -19,16 +19,12 @@ public class Main extends Plugin {
 
 	// Instancing
 	private static Main instance;
-	private static Configuration configuration;
 	private static Configuration botCommandConfiguration;
 	private static DebugLogger debugLogger;
+	private static MainConfigManager mcm;
 	
     public static Main inst() {
     	  return instance;
-    }
-    
-    public static Configuration getConfig() {
-    	return configuration;
     }
     
     public static Configuration getConfigBotCommand() {
@@ -37,6 +33,10 @@ public class Main extends Plugin {
     
     public DebugLogger getDebugLogger() {
     	return debugLogger;
+    }
+    
+    public static MainConfigManager getMCM() {
+    	return mcm;
     }
 	
 	@Override
@@ -49,13 +49,8 @@ public class Main extends Plugin {
 		// Start bStats
 		new MetricsLite(this);
 		
-		// Setup config
-		loadResource(this, "config.yml");
-		try {
-			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
-		} catch (IOException e) {
-			getLogger().severe("Error loading config.yml");
-		}
+		// Setup config (MainConfigManager)
+        mcm = new MainConfigManager();
 		
 		// Setup bot commands config
 		loadResource(this, "bot-command-options.yml");
@@ -68,7 +63,7 @@ public class Main extends Plugin {
 		// Setup Debug Logging
 		debugLogger = new DebugLogger();
         
-        new Discord(getConfig().getString("token"));
+        new Discord(getMCM().getToken());
         
         if (Discord.api != null) {
         	this.setLocalBotOptions();
@@ -95,7 +90,7 @@ public class Main extends Plugin {
 		
 		private static void playerJoinLeave() {
 			// Register Bungee Player Join/Leave Listeners
-			String jlcID = getConfig().getString("join-leave-chat-id");
+			String jlcID = getMCM().getJoinLeaveChatId();
 			
 			try {
 				Main.inst().getProxy().getPluginManager().registerListener(Main.inst(), new JoinLeave(jlcID));
