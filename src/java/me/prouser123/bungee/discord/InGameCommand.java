@@ -16,12 +16,17 @@ public class InGameCommand extends Command {
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
+		// bd command
 		if ( args.length == 0 )
         {
             sender.sendMessage(new TextComponent(this.title + " " + ChatColor.GRAY + Main.inst().getDescription().getVersion()));
             
             if (Discord.api != null) {
-                sender.sendMessage(new TextComponent("Connected to " + Discord.api.getServers().size() + " servers."));
+                sender.sendMessage(new TextComponent(this.connectedAsUser));
+                
+                Integer servers = Discord.api.getServers().size();
+                String suffix = (servers == 1)?  " server.": " servers.";
+                sender.sendMessage(new TextComponent("Connected to " + Integer.toString(servers) + suffix));
                 sender.sendMessage(new TextComponent(Discord.api.getServers().toString()));
                 
             } else {
@@ -36,11 +41,11 @@ public class InGameCommand extends Command {
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd token" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the bot token."));
 
             
-        // bd save command
+        // bd save command (testing purposes only)
         } else if (args[0].equalsIgnoreCase("save")) {
         	if (args.length == 1) {
             	Main.getMCM().write();
-                sender.sendMessage(new TextComponent(this.title + ChatColor.GREEN + " Saved!"));
+				sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Saved!"));
         	} else if (args[1].equalsIgnoreCase("token")) {
         		Main.getMCM().setToken(args[2]);
         	} else if (args[1].equalsIgnoreCase("jlcid")) {
@@ -48,6 +53,7 @@ public class InGameCommand extends Command {
         	} else if (args[1].equalsIgnoreCase("debug")) {
         		Main.getMCM().setDebugEnabled(Boolean.parseBoolean(args[2]));
         	}
+        	
             	
         // bd token command
         } else if (args[0].equalsIgnoreCase("token")) {
@@ -66,7 +72,7 @@ public class InGameCommand extends Command {
 					sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
 
                     Main.inst().getLogger().info(Main.getMCM().getToken());
-                    sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName()));
+                    sender.sendMessage(new TextComponent(this.connectedAsUser));
                 }
                 
             // User only put /bd token (1 command argument)
@@ -98,5 +104,7 @@ public class InGameCommand extends Command {
 	
 	public String title = (ChatColor.DARK_AQUA + "Bungee" + ChatColor.LIGHT_PURPLE + "Discord");
 	public String prefix = (ChatColor.WHITE + "[" + this.title + ChatColor.WHITE + "] " + ChatColor.GRAY);
+	
+	public String connectedAsUser = (this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName());
 	
 }
