@@ -25,6 +25,12 @@ public class Discord {
 	 * @param token bot token
 	 */
 	public Discord(String token) {
+		// Disconnect from the current instance if applicable, and set the instance to null
+		if (api != null) {
+			api.disconnect();
+			api = null;
+		}
+		
 		Discord.token = token;
 		
 		// Create an Instance of the DiscordApi
@@ -77,5 +83,13 @@ public class Discord {
 	// Sets the footer, done here to keep it standardised.
 	public static void setFooter(EmbedBuilder embed) {
 		embed.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd", Constants.footerIconURL);
+	}
+	
+	public static boolean isConnected() {
+		if (Discord.api != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

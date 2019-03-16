@@ -20,17 +20,17 @@ public class InGameCommand extends Command {
 		if ( args.length == 0 )
         {
             sender.sendMessage(new TextComponent(this.title + " " + ChatColor.GRAY + Main.inst().getDescription().getVersion()));
+            sender.sendMessage(new TextComponent(this.connectedAsUser(false)));
             
-            if (Discord.api != null) {
-                sender.sendMessage(new TextComponent(this.connectedAsUser));
-                
+            if (Discord.isConnected()) {
                 Integer servers = Discord.api.getServers().size();
                 String suffix = (servers == 1)?  " server.": " servers.";
                 sender.sendMessage(new TextComponent("Connected to " + Integer.toString(servers) + suffix));
                 sender.sendMessage(new TextComponent(Discord.api.getServers().toString()));
                 
             } else {
-            	sender.sendMessage(new TextComponent(ChatColor.RED + "Authentication Failure! Please use /bd token <token> or the config file to enter your bot token." ));
+            	sender.sendMessage(new TextComponent(ChatColor.RED + "Please use /bd token <token> or the config file to enter your bot token." ));
+            	sender.sendMessage(new TextComponent(ChatColor.RED + "If you edit the config file, please either use /bd reload or restart the server." ));
             }
             
         // bd help command
@@ -65,6 +65,16 @@ public class InGameCommand extends Command {
         	sender.sendMessage(new TextComponent("jclid: " + Main.getMCM().getJoinLeaveChatId()));
         	sender.sendMessage(new TextComponent("debug: " + Main.getMCM().getDebugEnabled()));
         	
+        	// Reconnect DiscordApi if it is null
+        	if (Discord.api == null) {
+        		new Discord(Main.getMCM().getToken());
+        		if (Discord.api != null) {
+                    Main.inst().setLocalBotOptions();
+                    Main.inst().getLogger().info("bd reload: token " + Main.getMCM().getToken());
+                    sender.sendMessage(new TextComponent(connectedAsUser(true)));
+        		}
+        	}
+        	
         	
         // bd token command
         } else if (args[0].equalsIgnoreCase("token")) {
@@ -83,7 +93,10 @@ public class InGameCommand extends Command {
 					sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
 
                     Main.inst().getLogger().info(Main.getMCM().getToken());
-                    sender.sendMessage(new TextComponent(this.connectedAsUser));
+                    sender.sendMessage(new TextComponent(this.connectedAsUser(true)));
+                } else {
+                	sender.sendMessage(new TextComponent(this.prefix + ChatColor.RED + "Invalid token! Please try another token. This has not been saved to the config."));
+                	sender.sendMessage(new TextComponent(this.prefix + ChatColor.RED + "If you had a working token before running this command, use /bd reload to use the old token"));
                 }
                 
             // User only put /bd token (1 command argument)
@@ -116,6 +129,16 @@ public class InGameCommand extends Command {
 	public String title = (ChatColor.DARK_AQUA + "Bungee" + ChatColor.LIGHT_PURPLE + "Discord");
 	public String prefix = (ChatColor.WHITE + "[" + this.title + ChatColor.WHITE + "] " + ChatColor.GRAY);
 	
-	public String connectedAsUser = (this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName());
-	
+	//public String connectedAsUser = (this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName());
+	public String connectedAsUser(boolean showPrefix) {
+		String output = "";
+		Main.inst().getLogger().info(Boolean.toString(showPrefix));
+		if (showPrefix) output += this.prefix;
+		try {
+			output += ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName();
+		} catch (NullPointerException ex) {
+			output += ChatColor.DARK_GREEN + "Not connected!";
+		}
+		return output;
+	}
 }
