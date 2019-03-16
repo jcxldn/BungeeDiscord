@@ -43,6 +43,7 @@ public class Main extends Plugin {
 	public void onEnable() {
 		// Instancing
 		instance = this;
+		UpdateChecker.getLatestVersion();
 		
 		getLogger().info("Welcome!");
 		
