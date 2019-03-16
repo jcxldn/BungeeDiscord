@@ -38,6 +38,7 @@ public class InGameCommand extends Command {
             sender.sendMessage(new TextComponent(this.title + ChatColor.GRAY + " Commands"));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd" + ChatColor.GRAY + " - " + ChatColor.GOLD + "View plugin and status information"));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd help" + ChatColor.GRAY + " - " + ChatColor.GOLD + "This page."));
+            sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd reload" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Reload from the config file."));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd token" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the bot token."));
 
             
@@ -54,7 +55,17 @@ public class InGameCommand extends Command {
         		Main.getMCM().setDebugEnabled(Boolean.parseBoolean(args[2]));
         	}
         	
-            	
+        	
+        // bd reload command
+        } else if (args[0].equalsIgnoreCase("reload")) {
+        	Main.getMCM().load();
+        	sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Reloaded from config."));
+        	// Log all variables for debugging
+        	sender.sendMessage(new TextComponent("token: " + Main.getMCM().getToken()));
+        	sender.sendMessage(new TextComponent("jclid: " + Main.getMCM().getJoinLeaveChatId()));
+        	sender.sendMessage(new TextComponent("debug: " + Main.getMCM().getDebugEnabled()));
+        	
+        	
         // bd token command
         } else if (args[0].equalsIgnoreCase("token")) {
         	// 2 command arguments (e.g. /bd token <token>)
