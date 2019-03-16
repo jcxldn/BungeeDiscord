@@ -90,7 +90,7 @@ public class InGameCommand extends Command {
                     // Attempt to set the new token and save the file
                     Main.getMCM().setToken(args[1]);
                     Main.getMCM().write();
-					sender.sendMessage(new TextComponent(this.prefix + ChatColor.GREEN + "Saved to config."));
+					sender.sendMessage(new TextComponent(this.prefix + ChatColor.DARK_GREEN + "Saved to config."));
 
                     Main.inst().getLogger().info(Main.getMCM().getToken());
                     sender.sendMessage(new TextComponent(this.connectedAsUser(true)));
