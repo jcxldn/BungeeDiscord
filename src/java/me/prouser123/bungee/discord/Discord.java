@@ -94,10 +94,6 @@ public class Discord {
 	}
 	
 	public static boolean isConnected() {
-		if (Discord.api != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return (Discord.api != null);
 	}
 }

@@ -50,7 +50,7 @@ public class UpdateChecker {
         String cmpStr = cmp < 0 ? "<" : cmp > 0 ? ">" : "==";
         Main.inst().getLogger().info("[Update.DEBUG] " + current + " " + cmpStr + " " + latest);
         Main.inst().getLogger().info("[Update.DEBUG] " + current + " (current) " + cmpStr + " " + latest + " (latest - master branch)");
-        if (cmpStr == "<") {
+        if (cmpStr.equals("<")) {
         	Main.inst().getLogger().info("[Update] Update available! v" + latest + " (currently v" + current + ")");
         	isUpdateAvailable = true;
         	availableVersion = latest;

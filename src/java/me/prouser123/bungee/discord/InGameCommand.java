@@ -1,6 +1,5 @@
 package me.prouser123.bungee.discord;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import net.md_5.bungee.api.ChatColor;
