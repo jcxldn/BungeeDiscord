@@ -33,16 +33,9 @@ public class UpdateChecker {
 			String current = Main.inst().getDescription().getVersion();
 			
 			// Compare
-			compare(current, latest);
-			//compare(current, "2.1-STABLE");
-			Main.inst().getLogger().info("----");
-			compare("1.11-latest", "1.11-rc2-latest");
-			Main.inst().getLogger().info("----");
-			compare("1.11-rc2-latest", "1.11-rc3-latest");
-			Main.inst().getLogger().info("----");
-			compare("1.11-rc3-latest", "1.11-rc2-latest");
-			Main.inst().getLogger().info("----");
-			compare(current, current);
+			//compare(current, latest);
+			compare("2.1-STABLE", "2.2-STABLE");
+			compare(current, "2.9-FAKE");
 			
 		} catch (Exception e) {
 			Main.inst().getLogger().warning("[Update] Error checking for updates.");

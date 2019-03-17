@@ -82,7 +82,15 @@ public class Discord {
 	
 	// Sets the footer, done here to keep it standardised.
 	public static void setFooter(EmbedBuilder embed) {
-		embed.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd", Constants.footerIconURL);
+		// Add first part of footer
+		String info = "Bungee Discord " + Main.inst().getDescription().getVersion().toString();
+		
+		// Add update text if there is an update available
+		if (UpdateChecker.isUpdateAvailable) {
+			info += " (update available!)";
+		}
+		
+		embed.setFooter(info + " | !bd", Constants.footerIconURL);
 	}
 	
 	public static boolean isConnected() {

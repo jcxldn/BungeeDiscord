@@ -43,7 +43,11 @@ public class Main extends Plugin {
 	public void onEnable() {
 		// Instancing
 		instance = this;
+		
+		// Check for updates
 		UpdateChecker.getLatestVersion();
+		getLogger().info("UpdateChecker.isUpdateAvailable: " + UpdateChecker.isUpdateAvailable);
+		getLogger().info("UpdateChecker.availableVersion: " + UpdateChecker.availableVersion);
 		
 		getLogger().info("Welcome!");
 		

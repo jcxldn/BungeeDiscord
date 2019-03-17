@@ -20,6 +20,11 @@ public class InGameCommand extends Command {
 		if ( args.length == 0 )
         {
             sender.sendMessage(new TextComponent(this.title + " " + ChatColor.GRAY + Main.inst().getDescription().getVersion()));
+
+            if (UpdateChecker.isUpdateAvailable) {
+            	sender.sendMessage(new TextComponent(ChatColor.GOLD + "There is a new update available: v" + UpdateChecker.availableVersion));
+            }
+            
             sender.sendMessage(new TextComponent(this.connectedAsUser(false)));
             
             if (Discord.isConnected()) {
