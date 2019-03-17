@@ -5,7 +5,11 @@ import java.util.Arrays;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class InGameCommand extends Command {
@@ -45,6 +49,7 @@ public class InGameCommand extends Command {
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd help" + ChatColor.GRAY + " - " + ChatColor.GOLD + "This page."));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd reload" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Reload from the config file."));
             sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd token" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the bot token."));
+            sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd invite" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Get the bot's invite link."));
 
             
         // bd save command (testing purposes only)
@@ -78,6 +83,20 @@ public class InGameCommand extends Command {
                     Main.inst().getLogger().info("bd reload: token " + Main.getMCM().getToken());
                     sender.sendMessage(new TextComponent(connectedAsUser(true)));
         		}
+        	}
+        	
+        	
+        // bd invite command
+        } else if (args[0].equalsIgnoreCase("invite")) {
+        	if (sender instanceof ProxiedPlayer) {
+        		Main.inst().getDebugLogger().info("is player");
+            	TextComponent message = new TextComponent(this.prefix + "Invite Link (click me!)");
+            	message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, Discord.api.createBotInvite()));
+            	message.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Invite your bot to your server!").create() ) );
+            	sender.sendMessage(message);
+        	} else {
+        		Main.inst().getDebugLogger().info("is not player");
+            	sender.sendMessage(new TextComponent(this.prefix + "Invite Link: " + Discord.api.createBotInvite()));
         	}
         	
         	
