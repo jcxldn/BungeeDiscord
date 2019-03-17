@@ -12,8 +12,9 @@ import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.MetricsLite;
 // Since we need all the commands here, this is fine.
-import me.prouser123.bungee.discord.commands.*;
-import me.prouser123.bungee.discord.commands.sub.*;
+import me.prouser123.bungee.discord.commands.bot.*;
+import me.prouser123.bungee.discord.commands.bot.sub.*;
+import me.prouser123.bungee.discord.commands.ingame.InGameCommand;
 
 public class Main extends Plugin {
 

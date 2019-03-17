@@ -1,4 +1,4 @@
-package me.prouser123.bungee.discord.commands;
+package me.prouser123.bungee.discord.commands.bot;
 
 import java.util.ArrayList;
 import java.util.Collections;
