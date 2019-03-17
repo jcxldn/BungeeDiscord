@@ -12,11 +12,19 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class InGameCommand extends Command {
-
+	
+	// Strings for messages so that they can be edited easily.
+	public static String helpMessageText = "Use /bd help for help.";
+	public static String invalidCommandText = "Invalid command.";	
+	public static String title = (ChatColor.DARK_AQUA + "Bungee" + ChatColor.LIGHT_PURPLE + "Discord");
+	public static String prefix = (ChatColor.WHITE + "[" + title + ChatColor.WHITE + "] " + ChatColor.GRAY);
+	
+	// Constructor
 	public InGameCommand() {
 		super("bd", "bungeediscord.use");
 	}
-
+	
+	// Main command method
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// bd command
@@ -64,23 +72,15 @@ public class InGameCommand extends Command {
         }
 	}
 	
+	// Other methods to keep them in one place
 	public static void helpMessage(CommandSender sender) {
-        sender.sendMessage(new TextComponent(ChatColor.RED + helpMessageText));
+	    sender.sendMessage(new TextComponent(ChatColor.RED + helpMessageText));
 	}
-	
+		
 	public static void invalidMessage(CommandSender sender) {
-        sender.sendMessage(new TextComponent(ChatColor.RED + invalidCommandText + " " + helpMessageText));
+	    sender.sendMessage(new TextComponent(ChatColor.RED + invalidCommandText + " " + helpMessageText));
 	}
-	
-	
-	// Strings for messages so that they can be edited easily.
-	public static String helpMessageText = "Use /bd help for help.";
-	public static String invalidCommandText = "Invalid command.";
-	
-	public static String title = (ChatColor.DARK_AQUA + "Bungee" + ChatColor.LIGHT_PURPLE + "Discord");
-	public static String prefix = (ChatColor.WHITE + "[" + title + ChatColor.WHITE + "] " + ChatColor.GRAY);
-	
-	//public String connectedAsUser = (this.prefix + ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName());
+		
 	public static String connectedAsUser(boolean showPrefix) {
 		String output = "";
 		Main.inst().getLogger().info(Boolean.toString(showPrefix));
