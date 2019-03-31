@@ -45,11 +45,6 @@ public class Main extends Plugin {
 		// Instancing
 		instance = this;
 		
-		// Check for updates
-		UpdateChecker.getLatestVersion();
-		getLogger().info("UpdateChecker.isUpdateAvailable: " + UpdateChecker.isUpdateAvailable);
-		getLogger().info("UpdateChecker.availableVersion: " + UpdateChecker.availableVersion);
-		
 		getLogger().info("Welcome!");
 		
 		// Start bStats
@@ -57,6 +52,12 @@ public class Main extends Plugin {
 		
 		// Setup config (MainConfigManager)
         mcm = new MainConfigManager();
+
+		// Check for updates
+        getLogger().info("Update DISABLED: " + mcm.getDisableUpdateCheck().toString());
+		UpdateChecker.getLatestVersion();
+		getLogger().info("UpdateChecker.isUpdateAvailable: " + UpdateChecker.isUpdateAvailable);
+		getLogger().info("UpdateChecker.availableVersion: " + UpdateChecker.availableVersion);
 		
 		// Setup bot commands config
 		loadResource(this, "bot-command-options.yml");

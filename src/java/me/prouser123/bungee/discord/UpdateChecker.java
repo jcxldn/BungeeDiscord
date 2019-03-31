@@ -14,6 +14,11 @@ public class UpdateChecker {
 	public static String availableVersion;
 	
 	public static void getLatestVersion() {
+		if (Main.getMCM().getDisableUpdateCheck()) {
+			Main.inst().getLogger().info("Update Checking has been disabled in the config.");
+			return;
+		}
+		
 		Main.inst().getLogger().info("[Update] Checking for updates...");
 		try {
 			String uri = "https://github.com/Prouser123/BungeeDiscord/raw/master/pom.xml";

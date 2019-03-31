@@ -15,7 +15,7 @@ public class MainConfigManager {
 		this.load();
 	}
 
-	private String[] lines = new String[14];
+	private String[] lines = new String[18];
 	
 	public File getDataFolder() {
 		return Main.inst().getDataFolder();
@@ -25,12 +25,14 @@ public class MainConfigManager {
 		private static String token = "bot-token-here";
 		private static String joinLeaveChatId = "123456789";
 		private static Boolean debugEnabled = false;
+		private static Boolean disableUpdateCheck = false;
 	}
 	
 	private static class values {
 		private static String token;
 		private static String joinLeaveChatId;
 		private static Boolean debugEnabled;
+		private static Boolean disableUpdateCheck;
 	}
 	
 	public String getToken() {
@@ -45,6 +47,10 @@ public class MainConfigManager {
 		return (values.debugEnabled != null) ? values.debugEnabled : defaultValues.debugEnabled;
 	}
 	
+	public Boolean getDisableUpdateCheck() {
+		return (values.disableUpdateCheck != null) ? values.disableUpdateCheck : defaultValues.disableUpdateCheck;
+	}
+	
 	public void setToken(String value) {
 		values.token = value;
 	}
@@ -55,6 +61,10 @@ public class MainConfigManager {
 	
 	public void setDebugEnabled(Boolean value) {
 		values.debugEnabled = value;
+	}
+	
+	public void setDisableUpdateCheck(Boolean value) {
+		values.disableUpdateCheck = value;
 	}
 	
 	public void populateLines() {
@@ -72,6 +82,10 @@ public class MainConfigManager {
 		lines[11] = "";
 		lines[12] = "# Enable debug logging? Only useful if you are developing this plugin.";
 		lines[13] = "debug-enabled: " + this.getDebugEnabled();
+		lines[14] = "";
+		lines[15] = "";
+		lines[16] = "# Disable update checking?";
+		lines[17] = "disable-update-check: " + this.getDisableUpdateCheck();
 	}
 	
 	public void write() {
@@ -110,6 +124,12 @@ public class MainConfigManager {
 			Boolean configDebug = configuration.getBoolean("debug-enabled");
 			if (configDebug != this.getDebugEnabled()) {
 				this.setDebugEnabled(configDebug);
+			}
+			
+			// done as disable as this defaults to false, so upgraders will get it.
+			Boolean configUpdate = configuration.getBoolean("disable-update-check");
+			if (configUpdate != this.getDisableUpdateCheck()) {
+				this.setDisableUpdateCheck(configUpdate);
 			}
 			
 		} catch (IOException e) {
