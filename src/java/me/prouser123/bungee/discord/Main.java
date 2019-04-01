@@ -7,16 +7,19 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.*;
 import java.util.NoSuchElementException;
+import java.util.concurrent.Callable;
 
 import com.google.common.io.ByteStreams;
 
-import me.prouser123.bstatsplus.bungee.MetricsLite;
+import me.prouser123.bstatsplus.bungee.Metrics;
 // Since we need all the commands here, this is fine.
 import me.prouser123.bungee.discord.commands.bot.*;
 import me.prouser123.bungee.discord.commands.bot.sub.*;
 import me.prouser123.bungee.discord.commands.ingame.InGameCommand;
 
 public class Main extends Plugin {
+	
+	private Integer totalDiscordUsers = 0;
 
 	// Instancing
 	private static Main instance;
@@ -48,7 +51,7 @@ public class Main extends Plugin {
 		getLogger().info("Welcome!");
 		
 		// Start bStats
-		new MetricsLite(this);
+		Metrics metrics = new Metrics(this);
 		
 		// Setup config (MainConfigManager)
         mcm = new MainConfigManager();
@@ -75,6 +78,21 @@ public class Main extends Plugin {
         if (Discord.api != null) {
         	this.setLocalBotOptions();
         }
+        
+        // Users on Discord servers using BungeeDiscord
+        getLogger().info("foreach.test: " + String.valueOf(totalDiscordUsers));
+        Discord.api.getServers().forEach(server -> {
+        	getLogger().info("foreach.test: " + server.getName() + " - " + server.getMemberCount());
+        	totalDiscordUsers += server.getMemberCount();
+        });
+        getLogger().info("foreach.test: total across all servers: " + String.valueOf(totalDiscordUsers));
+        
+        metrics.addCustomChart(new Metrics.SingleLineChart("discordServerUsers", new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return totalDiscordUsers;
+            }
+        }));
         
 		// Register in-game /bd command
         getProxy().getPluginManager().registerCommand(this, new InGameCommand());
