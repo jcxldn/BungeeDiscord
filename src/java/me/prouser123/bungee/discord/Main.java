@@ -79,7 +79,8 @@ public class Main extends Plugin {
         	this.setLocalBotOptions();
         }
         
-        // Users on Discord servers using BungeeDiscord
+        // bStats custom chart - Users on Discord servers using BungeeDiscord
+        // get member count of every server the bot is in
         getLogger().info("foreach.test: " + String.valueOf(totalDiscordUsers));
         Discord.api.getServers().forEach(server -> {
         	getLogger().info("foreach.test: " + server.getName() + " - " + server.getMemberCount());
@@ -87,6 +88,7 @@ public class Main extends Plugin {
         });
         getLogger().info("foreach.test: total across all servers: " + String.valueOf(totalDiscordUsers));
         
+        // add to metrics
         metrics.addCustomChart(new Metrics.SingleLineChart("discordServerUsers", new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
