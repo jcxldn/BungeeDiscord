@@ -24,7 +24,8 @@ public class Main extends Plugin {
 	// Instancing
 	private static Main instance;
 	private static Configuration botCommandConfiguration;
-	private static DebugLogger debugLogger;
+	// this one is public so that it can be accessed by the debug command 
+	public static DebugLogger debugLogger;
 	private static MainConfigManager mcm;
 	
     public static Main inst() {
