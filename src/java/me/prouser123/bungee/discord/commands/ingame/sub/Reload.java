@@ -1,5 +1,6 @@
 package me.prouser123.bungee.discord.commands.ingame.sub;
 
+import me.prouser123.bungee.discord.DebugLogger;
 import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.commands.ingame.InGameCommand;
@@ -27,5 +28,8 @@ public class Reload {
                 sender.sendMessage(new TextComponent(InGameCommand.connectedAsUser(true)));
     		}
     	}
+    	
+    	// reload the debug logger
+    	Main.debugLogger = new DebugLogger();
 	}
 }

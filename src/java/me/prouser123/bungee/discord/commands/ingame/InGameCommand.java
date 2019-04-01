@@ -68,7 +68,7 @@ public class InGameCommand extends Command {
         	
         // bd debug command
         } else if (args[0].equalsIgnoreCase("debug")) {
-        	Debug.execute(sender, args);
+        	Debug.execute(sender);
         	
         	
         // Show generic usage help command

@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class Debug {
 	
-	public static void execute(CommandSender sender, String[] args) {
+	public static void execute(CommandSender sender) {
 		// if debug is already enabled, we will disable it.
 		if (Main.getMCM().getDebugEnabled()) {
 			Main.getMCM().setDebugEnabled(false);
