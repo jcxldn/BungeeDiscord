@@ -65,6 +65,12 @@ public class InGameCommand extends Command {
         } else if (args[0].equalsIgnoreCase("token")) {
         	Token.execute(sender, args);
         	
+        	
+        // bd debug command
+        } else if (args[0].equalsIgnoreCase("debug")) {
+        	Debug.execute(sender, args);
+        	
+        	
         // Show generic usage help command
         } else {
             invalidMessage(sender);
