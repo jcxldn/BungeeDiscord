@@ -78,24 +78,24 @@ public class Main extends Plugin {
         
         if (Discord.api != null) {
         	this.setLocalBotOptions();
+        	
+        	// bStats custom chart - Users on Discord servers using BungeeDiscord
+            // get member count of every server the bot is in
+            getLogger().info("foreach.test: " + String.valueOf(totalDiscordUsers));
+            Discord.api.getServers().forEach(server -> {
+            	getLogger().info("foreach.test: " + server.getName() + " - " + server.getMemberCount());
+            	totalDiscordUsers += server.getMemberCount();
+            });
+            getLogger().info("foreach.test: total across all servers: " + String.valueOf(totalDiscordUsers));
+            
+            // add to metrics
+            metrics.addCustomChart(new Metrics.SingleLineChart("discordServerUsers", new Callable<Integer>() {
+                @Override
+                public Integer call() throws Exception {
+                    return totalDiscordUsers;
+                }
+            }));
         }
-        
-        // bStats custom chart - Users on Discord servers using BungeeDiscord
-        // get member count of every server the bot is in
-        getLogger().info("foreach.test: " + String.valueOf(totalDiscordUsers));
-        Discord.api.getServers().forEach(server -> {
-        	getLogger().info("foreach.test: " + server.getName() + " - " + server.getMemberCount());
-        	totalDiscordUsers += server.getMemberCount();
-        });
-        getLogger().info("foreach.test: total across all servers: " + String.valueOf(totalDiscordUsers));
-        
-        // add to metrics
-        metrics.addCustomChart(new Metrics.SingleLineChart("discordServerUsers", new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return totalDiscordUsers;
-            }
-        }));
         
 		// Register in-game /bd command
         getProxy().getPluginManager().registerCommand(this, new InGameCommand());
