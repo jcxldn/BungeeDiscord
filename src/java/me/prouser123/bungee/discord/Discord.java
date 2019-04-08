@@ -47,7 +47,7 @@ public class Discord {
         Main.inst().getLogger().info("Bot Invite Link: " + api.createBotInvite());
         
         // Set Activity
-        api.updateActivity(Constants.activity);
+        setStatus();
         
         // Create server join Listeners
         api.addServerJoinListener(event -> Main.inst().getLogger().info("Joined Server: " + event.getServer().getName()));
@@ -56,12 +56,12 @@ public class Discord {
         // Add Reconnect Listener to re-add status
         api.addReconnectListener(event -> {
         	Main.inst().getLogger().info(("Reconnected to Discord."));
-        	api.updateActivity(Constants.activity);
+        	setStatus();
         });
         
         api.addResumeListener(event -> {
         	Main.inst().getLogger().info(("Resumed connection to Discord."));
-        	api.updateActivity(Constants.activity);
+        	setStatus();
         });
 	}
 	
@@ -95,5 +95,11 @@ public class Discord {
 	
 	public static boolean isConnected() {
 		return (Discord.api != null);
+	}
+	
+	public static void setStatus() {
+		String status = Main.getMCM().getStatus();
+		status = status.replace("$prefix", "!bd");
+		api.updateActivity(status);
 	}
 }

@@ -18,6 +18,7 @@ public class Reload {
     	sender.sendMessage(new TextComponent("token: " + Main.getMCM().getToken()));
     	sender.sendMessage(new TextComponent("jclid: " + Main.getMCM().getJoinLeaveChatId()));
     	sender.sendMessage(new TextComponent("debug: " + Main.getMCM().getDebugEnabled()));
+    	sender.sendMessage(new TextComponent("status: " + Main.getMCM().getStatus()));
     	
     	// Reconnect DiscordApi if it is null
     	if (Discord.api == null) {
@@ -28,6 +29,9 @@ public class Reload {
                 sender.sendMessage(new TextComponent(InGameCommand.connectedAsUser(true)));
     		}
     	}
+    	
+    	// Update status
+    	Discord.setStatus();
     	
     	// reload the debug logger
     	Main.debugLogger = new DebugLogger();

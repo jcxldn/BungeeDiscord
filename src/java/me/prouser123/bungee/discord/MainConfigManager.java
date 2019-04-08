@@ -15,7 +15,7 @@ public class MainConfigManager {
 		this.load();
 	}
 
-	private String[] lines = new String[18];
+	private String[] lines = new String[23];
 	
 	public File getDataFolder() {
 		return Main.inst().getDataFolder();
@@ -26,6 +26,7 @@ public class MainConfigManager {
 		private static String joinLeaveChatId = "123456789";
 		private static Boolean debugEnabled = false;
 		private static Boolean disableUpdateCheck = false;
+		private static String status = "$prefix | BungeeDiscord";
 	}
 	
 	private static class values {
@@ -33,7 +34,10 @@ public class MainConfigManager {
 		private static String joinLeaveChatId;
 		private static Boolean debugEnabled;
 		private static Boolean disableUpdateCheck;
+		private static String status;
 	}
+	
+	// GET
 	
 	public String getToken() {
 		return (values.token != null) ? values.token : defaultValues.token;
@@ -51,6 +55,14 @@ public class MainConfigManager {
 		return (values.disableUpdateCheck != null) ? values.disableUpdateCheck : defaultValues.disableUpdateCheck;
 	}
 	
+	public String getStatus() {
+		Main.inst().getLogger().info("getStatus values: '" + values.status + "'");
+		Main.inst().getLogger().info("getStatus default: " + defaultValues.status);
+		return (!isEmpty(values.status)) ? values.status : defaultValues.status;
+	}
+	
+	// SET
+	
 	public void setToken(String value) {
 		values.token = value;
 	}
@@ -67,6 +79,10 @@ public class MainConfigManager {
 		values.disableUpdateCheck = value;
 	}
 	
+	public void setStatus(String value) {
+		values.status = value;
+	}
+	
 	public void populateLines() {
 		lines[0] = "# Bungee Discord Config File MCM";
 		lines[1] = "# Make sure there is always a space after any :";
@@ -80,12 +96,17 @@ public class MainConfigManager {
 		lines[9] = "join-leave-chat-id: '" + this.getJoinLeaveChatId() +"'";
 		lines[10] = "";
 		lines[11] = "";
-		lines[12] = "# Enable debug logging? Only useful if you are developing this plugin.";
-		lines[13] = "debug-enabled: " + this.getDebugEnabled();
-		lines[14] = "";
+		lines[12] = "# Discord Status";
+		lines[13] = "# Use the $prefix variable for the prefix";
+		lines[14] = "status: " + this.getStatus();
 		lines[15] = "";
-		lines[16] = "# Disable update checking?";
-		lines[17] = "disable-update-check: " + this.getDisableUpdateCheck();
+		lines[16] = "";
+		lines[17] = "# Enable debug logging? Only useful if you are developing this plugin.";
+		lines[18] = "debug-enabled: " + this.getDebugEnabled();
+		lines[19] = "";
+		lines[20] = "";
+		lines[21] = "# Disable update checking?";
+		lines[22] = "disable-update-check: " + this.getDisableUpdateCheck();
 	}
 	
 	public void write() {
@@ -132,8 +153,26 @@ public class MainConfigManager {
 				this.setDisableUpdateCheck(configUpdate);
 			}
 			
+			String configStatus = configuration.getString("status");
+			if (configStatus != this.getStatus()) {
+				this.setStatus(configStatus);
+			}
+			
 		} catch (IOException e) {
 			Main.inst().getLogger().severe("Error loading config.yml");
+		}
+	}
+	
+	private Boolean isEmpty(String string) {
+		if (string == null) {
+			Main.inst().getLogger().info("isEmpty null");
+			return true;
+		} else if (string.isEmpty() == true) {
+			Main.inst().getLogger().info("isEmpty empty");
+			return true;
+		} else {
+			Main.inst().getLogger().info("isEmpty false");
+			return false;
 		}
 	}
 }
