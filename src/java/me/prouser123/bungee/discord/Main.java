@@ -54,6 +54,14 @@ public class Main extends Plugin {
 		// Start bStats
 		Metrics metrics = new Metrics(this);
 		
+		// Setup bot commands config
+		loadResource(this, "bot-command-options.yml");
+		try {
+			botCommandConfiguration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "bot-command-options.yml"));
+		} catch (IOException e) {
+			getLogger().severe("Error loading bot-command-options.yml");
+		}
+		
 		// Setup config (MainConfigManager)
         mcm = new MainConfigManager();
 
@@ -62,14 +70,6 @@ public class Main extends Plugin {
 		UpdateChecker.getLatestVersion();
 		getLogger().info("UpdateChecker.isUpdateAvailable: " + UpdateChecker.isUpdateAvailable);
 		getLogger().info("UpdateChecker.availableVersion: " + UpdateChecker.availableVersion);
-		
-		// Setup bot commands config
-		loadResource(this, "bot-command-options.yml");
-		try {
-			botCommandConfiguration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "bot-command-options.yml"));
-		} catch (IOException e) {
-			getLogger().severe("Error loading bot-command-options.yml");
-		}
 		
 		// Setup Debug Logging
 		debugLogger = new DebugLogger();

@@ -3,6 +3,7 @@ package me.prouser123.bungee.discord;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -111,7 +112,7 @@ public class MainConfigManager {
 	
 	public void write() {
 		try {
-			Main.inst().getDebugLogger().info("MCM_WRITE");
+			//Main.inst().getDebugLogger().info("MCM_WRITE");
 			populateLines();
 			FileWriter fw=new FileWriter(getDataFolder() + File.separator + "config.yml");
 
@@ -157,9 +158,14 @@ public class MainConfigManager {
 			if (configStatus != this.getStatus()) {
 				this.setStatus(configStatus);
 			}
+		
+		} catch (FileNotFoundException e) {
+			Main.inst().getLogger().info("config.yml not found, creating...");
+			write();
+			//e.printStackTrace();
 			
 		} catch (IOException e) {
-			Main.inst().getLogger().severe("Error loading config.yml");
+			Main.inst().getLogger().severe("Error loading config.yml. Run /bd save to re-make the config file. \n" + e.toString());
 		}
 	}
 	
