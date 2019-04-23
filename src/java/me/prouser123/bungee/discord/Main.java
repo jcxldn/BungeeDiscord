@@ -1,5 +1,6 @@
 package me.prouser123.bungee.discord;
 
+import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -114,18 +115,37 @@ public class Main extends Plugin {
 		
 	}
 	
-	private static class registerListeners {
+	// Public so it can be accessed from in-game commands
+	public static class registerListeners {
 		
-		private static void playerJoinLeave() {
+		public static Boolean jlcidEnabled = false;
+		
+		// Public so it can be accessed from in-game commands (bd jlcid)
+		public static void playerJoinLeave() {
 			// Register Bungee Player Join/Leave Listeners
 			String jlcID = getMCM().getJoinLeaveChatId();
 			
 			try {
 				Main.inst().getProxy().getPluginManager().registerListener(Main.inst(), new JoinLeave(jlcID));
 				Main.inst().getLogger().info("Join Leave Chat enabled for channel: #" + Discord.api.getChannelById(jlcID).toString().replaceAll(".*\\[|\\].*", "") + " (id: " + jlcID + ")");
+				jlcidEnabled = true;
 			} catch (NoSuchElementException e) {
 
 				Main.inst().getLogger().info("Join Leave Chat disabled. Did you put a valid channel ID in the config?");
+				jlcidEnabled = false;
+				
+				// Deregister the listener and reset the JoinLeave channel if required
+				try {
+					Listener l = JoinLeave.inst();
+					Main.instance.getProxy().getPluginManager().unregisterListener(l);
+					JoinLeave.channel = null;
+					Main.inst().getLogger().info("deregistered listener and cleared channel");
+				} catch (NullPointerException ex) {
+					Main.inst().getLogger().info("Failed to deregister listener - NPE");
+					return;
+				}
+				
+				// Return
 				return;
 			}
 		}

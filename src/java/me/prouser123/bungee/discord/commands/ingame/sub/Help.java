@@ -15,6 +15,7 @@ public class Help {
         sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd reload" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Reload from the config file."));
         sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd invite" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Get the bot's invite link."));
         sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd token" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the bot token."));
+        sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd jlcid" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Set the player join leave chat id."));
         sender.sendMessage(new TextComponent(ChatColor.DARK_GREEN + "/bd debug" + ChatColor.GRAY + " - " + ChatColor.GOLD + "Toggle debug logging."));
 	}
 }

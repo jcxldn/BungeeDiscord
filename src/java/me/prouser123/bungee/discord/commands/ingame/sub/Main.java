@@ -34,6 +34,13 @@ public class Main {
             String suffix = (servers.size() == 1)?  " server: ": " servers: ";
             sender.sendMessage(new TextComponent(ChatColor.GRAY + "Connected to " + Integer.toString(servers.size()) + suffix + servers.toString().replace("[","").replace("]","")));
             
+            // Add info about join leave chat if it is enabled
+            if (me.prouser123.bungee.discord.Main.registerListeners.jlcidEnabled) {
+            	sender.sendMessage(new TextComponent(InGameCommand.jlcEnabledForChannel()));
+    		} else {
+            	sender.sendMessage(new TextComponent(ChatColor.RED + "Join Leave Chat not enabled. To enable, edit the config file or type /bd jlcid"));
+            }
+            
         } else {
         	sender.sendMessage(new TextComponent(ChatColor.RED + "Please use /bd token <token> or the config file to enter your bot token." ));
         	sender.sendMessage(new TextComponent(ChatColor.RED + "If you edit the config file, please either use /bd reload or restart the server." ));

@@ -11,8 +11,16 @@ public class JoinLeave implements Listener {
 	
 	public static TextChannel channel = null;
 	
+	// Instancing
+	private static JoinLeave instance;
+	
+	public static JoinLeave inst() {
+		return instance;
+	}
+	
 	public JoinLeave(String id) {
 		JoinLeave.channel = Discord.api.getTextChannelById(id).get();
+		instance = this;
 	}
 	
 	@EventHandler

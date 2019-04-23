@@ -65,6 +65,9 @@ public class InGameCommand extends Command {
         } else if (args[0].equalsIgnoreCase("token")) {
         	Token.execute(sender, args);
         	
+        // bd jlcid command
+        } else if (args[0].equalsIgnoreCase("jlcid")) {
+        	JLCID.execute(sender, args);
         	
         // bd debug command
         } else if (args[0].equalsIgnoreCase("debug")) {
@@ -97,5 +100,10 @@ public class InGameCommand extends Command {
 			output += ChatColor.DARK_GREEN + "Not connected!";
 		}
 		return output;
+	}
+	
+	public static String jlcEnabledForChannel() {
+		String jlcID = me.prouser123.bungee.discord.Main.getMCM().getJoinLeaveChatId();
+		return (ChatColor.DARK_GREEN + "Join Leave Chat enabled for channel: " + ChatColor.GRAY + "#" + Discord.api.getChannelById(jlcID).toString().replaceAll(".*\\[|\\].*", "") + " (id: " + jlcID + ")");
 	}
 }
