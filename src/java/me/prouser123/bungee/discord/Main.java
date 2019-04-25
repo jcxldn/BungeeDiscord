@@ -85,14 +85,8 @@ public class Main extends Plugin {
                 @Override
                 // get member count of every server the bot is in
                 public Integer call() throws Exception {
-                    getLogger().info("bstats-dsu.before_reset: " + String.valueOf(totalDiscordUsers));
                 	totalDiscordUsers = 0;
-                    getLogger().info("bstats-dsu.after_reset: " + String.valueOf(totalDiscordUsers));
-                    Discord.api.getServers().forEach(server -> {
-                    	getLogger().info("bstats-dsu.foreach: " + server.getName() + " - " + server.getMemberCount());
-                    	totalDiscordUsers += server.getMemberCount();
-                    });
-                    getLogger().info("bstats-dsu: total across all servers: " + String.valueOf(totalDiscordUsers));
+                    Discord.api.getServers().forEach(server -> totalDiscordUsers += server.getMemberCount());
                     return totalDiscordUsers;
                 }
             }));
