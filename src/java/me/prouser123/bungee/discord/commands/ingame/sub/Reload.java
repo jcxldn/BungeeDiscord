@@ -35,5 +35,14 @@ public class Reload {
     	
     	// reload the debug logger
     	Main.debugLogger = new DebugLogger();
+    	
+    	// reload player join leave
+		Main.registerListeners.playerJoinLeave();
+		
+		if (Main.registerListeners.jlcidEnabled == true) {
+        	sender.sendMessage(new TextComponent(InGameCommand.jlcEnabledForChannel()));
+		} else {
+			sender.sendMessage(new TextComponent(InGameCommand.prefix + ChatColor.RED + "Join Leave Chat disabled. Did you put a valid channel id in the config?"));
+		}
 	}
 }
