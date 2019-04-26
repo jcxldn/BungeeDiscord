@@ -173,7 +173,7 @@ public class MainConfigManager {
 		if (string == null) {
 			Main.inst().getLogger().info("isEmpty null");
 			return true;
-		} else if (string.isEmpty() == true) {
+		} else if (string.isEmpty()) {
 			Main.inst().getLogger().info("isEmpty empty");
 			return true;
 		} else {

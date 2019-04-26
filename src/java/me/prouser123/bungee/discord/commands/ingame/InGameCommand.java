@@ -103,7 +103,7 @@ public class InGameCommand extends Command {
 	}
 	
 	public static String jlcEnabledForChannel() {
-		String jlcID = me.prouser123.bungee.discord.Main.getMCM().getJoinLeaveChatId();
+		String jlcID = Main.getMCM().getJoinLeaveChatId();
 		return (ChatColor.DARK_GREEN + "Join Leave Chat enabled for channel: " + ChatColor.GRAY + "#" + Discord.api.getChannelById(jlcID).toString().replaceAll(".*\\[|\\].*", "") + " (id: " + jlcID + ")");
 	}
 }
