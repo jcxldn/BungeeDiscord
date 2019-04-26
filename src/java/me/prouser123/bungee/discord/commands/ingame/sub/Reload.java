@@ -39,7 +39,7 @@ public class Reload {
     	// reload player join leave
 		Main.registerListeners.playerJoinLeave();
 		
-		if (Main.registerListeners.jlcidEnabled == true) {
+		if (Main.registerListeners.jlcidEnabled) {
         	sender.sendMessage(new TextComponent(InGameCommand.jlcEnabledForChannel()));
 		} else {
 			sender.sendMessage(new TextComponent(InGameCommand.prefix + ChatColor.RED + "Join Leave Chat disabled. Did you put a valid channel id in the config?"));

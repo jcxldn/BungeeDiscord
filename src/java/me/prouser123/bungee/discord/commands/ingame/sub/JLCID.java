@@ -1,6 +1,5 @@
 package me.prouser123.bungee.discord.commands.ingame.sub;
 
-import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.commands.ingame.InGameCommand;
 import net.md_5.bungee.api.ChatColor;
@@ -28,7 +27,7 @@ public class JLCID {
     		Main.registerListeners.playerJoinLeave();
     		sender.sendMessage(new TextComponent("writeRes: " + Main.registerListeners.jlcidEnabled.toString()));
     		
-    		if (Main.registerListeners.jlcidEnabled == true) {
+    		if (Main.registerListeners.jlcidEnabled) {
             	sender.sendMessage(new TextComponent(InGameCommand.jlcEnabledForChannel()));
     		} else {
     			if (args[1].equalsIgnoreCase("off")) {
