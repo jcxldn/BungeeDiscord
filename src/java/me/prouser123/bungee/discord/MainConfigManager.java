@@ -57,8 +57,6 @@ public class MainConfigManager {
 	}
 	
 	public String getStatus() {
-		Main.inst().getLogger().info("getStatus values: '" + values.status + "'");
-		Main.inst().getLogger().info("getStatus default: " + defaultValues.status);
 		return (!isEmpty(values.status)) ? values.status : defaultValues.status;
 	}
 	
@@ -171,13 +169,10 @@ public class MainConfigManager {
 	
 	private Boolean isEmpty(String string) {
 		if (string == null) {
-			Main.inst().getLogger().info("isEmpty null");
 			return true;
 		} else if (string.isEmpty()) {
-			Main.inst().getLogger().info("isEmpty empty");
 			return true;
 		} else {
-			Main.inst().getLogger().info("isEmpty false");
 			return false;
 		}
 	}
