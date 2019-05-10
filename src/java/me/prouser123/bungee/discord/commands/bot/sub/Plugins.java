@@ -42,7 +42,7 @@ public class Plugins implements MessageCreateListener, BaseSubCommand {
         	for (Plugin plugin: plugins) {
         		
             	// Hide modules
-            	if (plugin.getDescription().getAuthor().equals("SpigotMC")) {
+            	if (Main.isModule(plugin)) {
             		// Plugin is likely a module
             		moduleCount += 1;
             	} else {

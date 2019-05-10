@@ -206,6 +206,19 @@ public class Main extends Plugin {
         ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(plugin.getDataFolder(), resourcePath));
 	}
 	
+
+	// if plugin version has the same style, mc version and sha
+	// OR
+	// author is SpigotMC/WaterfallMC (in rare cases where the mc version might not match up)
+	public static boolean isModule(Plugin plugin) {
+		String version = plugin.getDescription().getVersion();
+		String author = plugin.getDescription().getAuthor();
+		
+		String[] proxyVersionSplit = Main.inst().getProxy().getVersion().split(":");
+		
+		return (version.startsWith("git") && version.endsWith(proxyVersionSplit[2] + ":" + proxyVersionSplit[3]) || author.equals("SpigotMC") || author.equals("WaterfallMC"));
+	}
+	
 	@Override
 	public void onDisable() {
 		if (Discord.api != null) {

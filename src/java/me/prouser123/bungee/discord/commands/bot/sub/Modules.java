@@ -15,6 +15,7 @@ import me.prouser123.bungee.discord.Discord;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseSubCommand;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.api.plugin.PluginDescription;
 
 public class Modules implements MessageCreateListener, BaseSubCommand {
 	
@@ -43,8 +44,8 @@ public class Modules implements MessageCreateListener, BaseSubCommand {
         	EmbedBuilder embed = new EmbedBuilder().setAuthor("BungeeCord Modules", Constants.url, Constants.authorIconURL);
         	
         	for (Plugin plugin: plugins) {
-            	// Hide modules
-            	if (plugin.getDescription().getAuthor().equals("SpigotMC")) {
+            	// Only add modules
+            	if (Main.isModule(plugin)) {
             		// Plugin is likely a module
             		modules.add(plugin.getDescription().getName());
             	}
