@@ -13,19 +13,15 @@ public class Token {
 
     	// 2 command arguments (e.g. /bd token <token>)
     	if (args.length == 2) {
-    		sender.sendMessage(new TextComponent("token: " + args[1]));
-    		
             new Discord(args[1]);
             if (Discord.api != null) {
                 Main.inst().setLocalBotOptions();
-                Main.inst().getLogger().info(Main.getMCM().getToken());
                 
                 // Attempt to set the new token and save the file
                 Main.getMCM().setToken(args[1]);
                 Main.getMCM().write();
 				sender.sendMessage(new TextComponent(InGameCommand.prefix + ChatColor.DARK_GREEN + "Saved to config."));
 
-                Main.inst().getLogger().info(Main.getMCM().getToken());
                 sender.sendMessage(new TextComponent(InGameCommand.connectedAsUser(true)));
             } else {
             	sender.sendMessage(new TextComponent(InGameCommand.prefix + ChatColor.RED + "Invalid token! Please try another token. This has not been saved to the config."));

@@ -92,7 +92,6 @@ public class InGameCommand extends Command {
 		
 	public static String connectedAsUser(boolean showPrefix) {
 		String output = "";
-		Main.inst().getLogger().info(Boolean.toString(showPrefix));
 		if (showPrefix) output += prefix;
 		try {
 			output += ChatColor.DARK_GREEN + "Connected as " + Discord.api.getAccountType().toString().toLowerCase() +  " user: " + ChatColor.GRAY + Discord.api.getYourself().getName();
