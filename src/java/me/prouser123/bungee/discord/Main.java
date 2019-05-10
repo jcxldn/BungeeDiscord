@@ -177,6 +177,8 @@ public class Main extends Plugin {
 			Discord.api.addMessageCreateListener(new StealAvatar(1, "!bd steal", "GoD.stealAvatar"));
 			Discord.api.addMessageCreateListener(new Invite(2, "!bd invite", "Show a bot invite link to add the bot to other servers."));
 			Discord.api.addMessageCreateListener(new Debug(3, "!bd debug", "Show debug information."));
+			Discord.api.addMessageCreateListener(new Plugins(4, "!bd plugins", "Show active plugins. (requires admin)"));
+			Discord.api.addMessageCreateListener(new Modules(5, "!bd modules", "Show active modules. (requires admin)"));
 		}
 	}
 	
