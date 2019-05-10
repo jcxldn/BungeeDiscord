@@ -28,6 +28,7 @@ public class Main extends Plugin {
 	// this one is public so that it can be accessed by the debug command 
 	public static DebugLogger debugLogger;
 	private static MainConfigManager mcm;
+	private static BungeeVersionSplit bvs;
 	
     public static Main inst() {
     	  return instance;
@@ -43,6 +44,10 @@ public class Main extends Plugin {
     
     public static MainConfigManager getMCM() {
     	return mcm;
+    }
+    
+    public static BungeeVersionSplit getVersion() {
+    	return bvs;
     }
 	
 	@Override
@@ -65,6 +70,9 @@ public class Main extends Plugin {
 		
 		// Setup config (MainConfigManager)
         mcm = new MainConfigManager();
+        
+        // Setup BungeeVersionSplit for the proxy
+        bvs = new BungeeVersionSplit(getProxy());
 
 		// Check for updates
         getLogger().info("Update DISABLED: " + mcm.getDisableUpdateCheck().toString());

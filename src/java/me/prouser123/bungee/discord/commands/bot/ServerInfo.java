@@ -75,8 +75,17 @@ public class ServerInfo implements MessageCreateListener, BaseCommand {
             	.addInlineField("Memory", Long.toString(Runtime.getRuntime().freeMemory() / 1024 / 1024 ) + "/" + Long.toString(Runtime.getRuntime().totalMemory() / 1024 / 1024) + " MB free")
             	.addInlineField("Servers", Integer.toString(Main.inst().getProxy().getServers().size()))
             	.addInlineField("Server Versions", Main.inst().getProxy().getGameVersion().toString())
-            	.addInlineField("Bot Owner", bot_owner)
-            	.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion());
+            	.addInlineField("Bot Owner", bot_owner);
+            	//.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion());
+        	
+        	// Add Server Version Field
+        	if (Main.getVersion().isValid) {
+        		// BungeeVersionSplit detected a valid version, so we can use the nice new format.
+        		embed.addInlineField("Server Software", System.getProperty("os.name") + ", " + Main.getVersion().getProxyProductName() + " " + Main.getVersion().getMCVersion() + " (sha " + Main.getVersion().getSha() + ", build #" + Main.getVersion().getJenkinsBuildNumber() + ")");
+        	} else {
+        		// Fallback to the old format
+        		embed.addInlineField("Server Software", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion());
+        	}
         	
         	// Set footer
         	Discord.setFooter(embed);
