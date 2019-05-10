@@ -73,12 +73,23 @@ public class ServerInfo implements MessageCreateListener, BaseCommand {
             	.addInlineField("Players", Integer.toString(Main.inst().getProxy().getPlayers().size()) + "/" + Integer.toString(Main.inst().getProxy().getConfig().getPlayerLimit()))
             	.addInlineField("Uptime", uptime_output)
             	.addInlineField("Memory", Long.toString(Runtime.getRuntime().freeMemory() / 1024 / 1024 ) + "/" + Long.toString(Runtime.getRuntime().totalMemory() / 1024 / 1024) + " MB free")
-            	.addInlineField("Servers", Integer.toString(Main.inst().getProxy().getServers().size()))
-            	.addInlineField("Server Versions", Main.inst().getProxy().getGameVersion().toString())
-            	.addInlineField("Bot Owner", bot_owner);
-            	//.addInlineField("Server Version", System.getProperty("os.name") + ", " + Main.inst().getProxy().getVersion());
+            	.addInlineField("Servers", Integer.toString(Main.inst().getProxy().getServers().size()));
         	
-        	// Add Server Version Field
+        	// Server Versions Field
+        	if (Main.getVersion().isValid && Main.getVersion().isPaperMCBungee()) {
+        		// Running under Waterfall/Travertine, fix getGameVersion()
+        		Main.inst().getLogger().info("[ServerInfo] PAPER BUNGEE");
+        		
+        		String[] versionsSplit = Main.inst().getProxy().getGameVersion().toString().split(", ");
+        		embed.addInlineField("Server Versions", versionsSplit[0] + "-" + versionsSplit[versionsSplit.length - 1]);
+        	} else {
+                embed.addInlineField("Server Versions", Main.inst().getProxy().getGameVersion().toString());
+        	}
+            
+            // Bot Owner Field
+            embed.addInlineField("Bot Owner", bot_owner);
+        	
+        	// Server Version Field
         	if (Main.getVersion().isValid) {
         		// BungeeVersionSplit detected a valid version, so we can use the nice new format.
         		embed.addInlineField("Server Software", System.getProperty("os.name") + ", " + Main.getVersion().getProxyProductName() + " " + Main.getVersion().getMCVersion() + " (sha " + Main.getVersion().getSha() + ", build #" + Main.getVersion().getJenkinsBuildNumber() + ")");

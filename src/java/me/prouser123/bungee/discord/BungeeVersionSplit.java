@@ -51,4 +51,15 @@ public class BungeeVersionSplit {
 	public String getJenkinsBuildNumber() {
 		return this.split[4];
 	}
+	
+	public Boolean isPaperMCBungee() {
+		if (getProxyProductName().equals("Travertine")) {
+			return true;
+		} else if (getProxyProductName().equals("Waterfall")) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 }
