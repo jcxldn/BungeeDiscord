@@ -23,7 +23,7 @@ public class Main extends Plugin {
 	private Integer totalDiscordUsers = 0;
 
 	// Instancing
-	private static Main instance;
+	public static Main instance;
 	private static Configuration botCommandConfiguration;
 	// this one is public so that it can be accessed by the debug command 
 	public static DebugLogger debugLogger;
