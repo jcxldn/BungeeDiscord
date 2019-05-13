@@ -22,11 +22,11 @@
   </repositories>
   
   <build>
-    <sourceDirectory>src/java</sourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
       <resource>
         <filtering>true</filtering>
-        <directory>src/resources</directory>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
     <plugins>
