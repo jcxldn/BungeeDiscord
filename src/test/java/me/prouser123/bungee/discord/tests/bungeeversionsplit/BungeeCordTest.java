@@ -1,23 +1,17 @@
 package me.prouser123.bungee.discord.tests.bungeeversionsplit;
 
 import me.prouser123.bungee.discord.BungeeVersionSplit;
-import me.prouser123.bungee.discord.Main;
-
-import org.powermock.api.mockito.PowerMockito;
-
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 public class BungeeCordTest {
 	
-	public static Core c = new Core("git:BungeeCord-Bootstrap:1.13-SNAPSHOT:0dd538f:1396");
+	public static Core c = new Core(Core.ConstantVersions.bungeecord);
 	
 	@BeforeClass
     public static void setUp() throws Exception {
-		Main.instance = c.main;
-        PowerMockito.when(c.main.getLogger()).thenReturn(c.getLogger());
-        c.bvs = new BungeeVersionSplit(c.getProxyServer());
+        c.bvs = new BungeeVersionSplit(c.getProxy());
     }
 	
 	@Test

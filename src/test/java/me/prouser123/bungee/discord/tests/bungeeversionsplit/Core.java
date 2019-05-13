@@ -23,8 +23,28 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.api.scheduler.TaskScheduler;
 
+/**
+ * 
+ * Intended for use by the BungeeVersionSplit test classes.
+ * 
+ * <p>Mock and test:
+ * 
+ * <ul>
+ *   <li>Main.inst().getProxy().getVersion()</li>
+ *   <li>Main.inst().getLogger()</li>
+ * </ul>
+ */
 @SuppressWarnings("deprecation")
 public class Core {
+	
+	/**
+	 * Server version constants for popular platforms.
+	 */
+	public static final class ConstantVersions {
+		public static final String bungeecord = "git:BungeeCord-Bootstrap:1.13-SNAPSHOT:0dd538f:1396";
+		public static final String travertine = "git:Travertine-Bootstrap:1.14-SNAPSHOT:68f2b82:99";
+		public static final String waterfall = "git:Waterfall-Bootstrap:1.14-SNAPSHOT:b438f80:282";
+	}
 	
 	private static String proxyVersion;
 	
@@ -243,13 +263,11 @@ public class Core {
 
 	public Core(String proxyVersion) {
 		Core.proxyVersion = proxyVersion;
+		Main.instance = main;
+        PowerMockito.when(main.getLogger()).thenReturn(logger);
 	}
 	
-	public Logger getLogger() {
-		return logger;
-	}
-	
-	public ProxyServer getProxyServer() {
+	public ProxyServer getProxy() {
 		return proxyServer;
 	}
 }

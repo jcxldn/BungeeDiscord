@@ -1,23 +1,17 @@
 package me.prouser123.bungee.discord.tests.bungeeversionsplit;
 
 import me.prouser123.bungee.discord.BungeeVersionSplit;
-import me.prouser123.bungee.discord.Main;
-
-import org.powermock.api.mockito.PowerMockito;
-
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 public class TravertineTest {
 	
-	public static Core c = new Core("git:Travertine-Bootstrap:1.14-SNAPSHOT:68f2b82:99");
+	public static Core c = new Core(Core.ConstantVersions.travertine);
 
 	@BeforeClass
     public static void setUp() throws Exception {
-		Main.instance = c.main;
-        PowerMockito.when(c.main.getLogger()).thenReturn(c.getLogger());
-        c.bvs = new BungeeVersionSplit(c.getProxyServer());
+        c.bvs = new BungeeVersionSplit(c.getProxy());
     }
 
 	@Test
