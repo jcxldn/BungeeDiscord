@@ -12,13 +12,11 @@ public class JLCID {
 
     	// 2 command arguments (e.g. /bd jlcid <id>)
     	if (args.length == 2) {
-    		sender.sendMessage(new TextComponent("jlcid: " + args[1]));
     		
     		// if user put /bd jlcid off
     		if (args[1].equalsIgnoreCase("off")) {
     			// set the channel ID to the default
     			Main.getMCM().setJoinLeaveChatId("123456789");
-        		sender.sendMessage(new TextComponent("argOff"));
     		} else {
     			Main.getMCM().setJoinLeaveChatId(args[1]);
     		}

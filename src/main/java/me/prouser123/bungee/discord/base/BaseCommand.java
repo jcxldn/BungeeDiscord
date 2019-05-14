@@ -16,7 +16,6 @@ public interface BaseCommand {
 		base b = this.createBase();
 		
 		b.add(piority, command, helpText);
-		debugInit(piority, command, helpText, b);
 		addCommandToHelp(b);
 		
 		return b;
@@ -36,14 +35,7 @@ public interface BaseCommand {
 	}
 	
 	default void addCommandToHelp(base b) {
-		Main.inst().getDebugLogger().info("[BaseCommand@Add2Help] Adding " + b.command);
+		Main.inst().getDebugLogger().info("[BaseCommand@Add2Help] Adding command '" + b.command + "' with piority " + b.helpPriority);
 		MainCommand.array.add(b.helpPriority, b.command + arraySeperator + b.helpText);
-		Main.inst().getDebugLogger().info("[BaseCommand@Add2Help] " + MainCommand.array);
-	}
-	
-	// Command to dump information about help array
-	default void debugInit(int piority, String command, String helpText, base base) {
-		Main.inst().getDebugLogger().info("[BaseCommand@debugInit] Init info: " + piority + " | " + command + " | " + helpText);
-		Main.inst().getDebugLogger().info("[BaseCommand@debugInit] BASE() info: | " + base.helpPriority + " | " + base.command + " | " + base.helpText);
 	}
 }

@@ -22,8 +22,7 @@ public class MainCommand implements MessageCreateListener, BaseCommand, Generate
 		subArray = new ArrayList<String>();
 		
 		// Debug information
-		Main.inst().getDebugLogger().info("[MainCommand@Init] Loaded MainCommand and Array");
-		Main.inst().getDebugLogger().info("[MainCommand@Init] Arr: " + array);
+		Main.inst().getDebugLogger().info("[MainCommand@Init] Loaded MainCommand and Array(s)");
 	}
 	
 	/**
