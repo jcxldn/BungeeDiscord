@@ -98,6 +98,16 @@ public class Main extends Plugin {
                     return totalDiscordUsers;
                 }
             }));
+            
+            // bStats custom chart - origin
+            BuildOrigin bo = new BuildOrigin();
+            metrics.addCustomChart(new Metrics.SimplePie("origin", new Callable<String>() {
+            	@Override
+            	public String call() throws Exception {
+            		Main.inst().getDebugLogger().info("[BuildOrigin@stats] value:" + bo.origin);
+            		return bo.origin;
+            	}
+            }));
         }
         
 		// Register in-game /bd command
