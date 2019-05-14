@@ -2,7 +2,6 @@ package me.prouser123.bungee.discord.commands.bot.sub;
 
 import java.util.Collection;
 
-import org.javacord.api.Javacord;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
@@ -26,7 +25,7 @@ public class Plugins implements MessageCreateListener, BaseSubCommand {
         if (event.getMessage().getContent().equalsIgnoreCase(base.command)) {
         	
         	// Check if the message author is a server admin
-            if (!event.getMessage().getAuthor().isServerAdmin()) {
+            if (!Discord.isAdmin(event)) {
                 event.getChannel().sendMessage("You are not allowed to use this command!");
                 return;
             }

@@ -102,4 +102,8 @@ public class Discord {
 		status = status.replace("$prefix", "!bd");
 		api.updateActivity(status);
 	}
+	
+	public static boolean isAdmin(MessageCreateEvent event) {
+		return event.getMessage().getAuthor().isServerAdmin();
+	}
 }
