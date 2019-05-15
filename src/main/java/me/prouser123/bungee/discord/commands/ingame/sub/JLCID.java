@@ -23,7 +23,6 @@ public class JLCID {
     		
     		Main.getMCM().write();
     		Main.registerListeners.playerJoinLeave();
-    		sender.sendMessage(new TextComponent("writeRes: " + Main.registerListeners.jlcidEnabled.toString()));
     		
     		if (Main.registerListeners.jlcidEnabled) {
             	sender.sendMessage(new TextComponent(InGameCommand.jlcEnabledForChannel()));
