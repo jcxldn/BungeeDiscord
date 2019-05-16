@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Callable;
 
+import javax.management.InstanceAlreadyExistsException;
+
 import com.google.common.io.ByteStreams;
 
 import me.prouser123.bstatsplus.bungee.Metrics;
@@ -23,15 +25,31 @@ public class Main extends Plugin {
 	private Integer totalDiscordUsers = 0;
 
 	// Instancing
-	public static Main instance;
+	private static Main instance;
 	private static Configuration botCommandConfiguration;
-	// this one is public so that it can be accessed by the debug command 
-	public static DebugLogger debugLogger;
 	private static MainConfigManager mcm;
 	private static BungeeVersionSplit bvs;
 	
+	// this one is public so that it can be accessed by the debug command 
+	public static DebugLogger debugLogger;
+	
     public static Main inst() {
     	  return instance;
+    }
+    
+    /**
+     * Set the static Main instance.
+     * <p>Accessible through Main.inst()</p>
+     * 
+     * @param inst instance to set
+     * @throws InstanceAlreadyExistsException when the instance has already been set
+     */
+    public static void setInst(Main inst) throws InstanceAlreadyExistsException {
+    	if (instance == null) {
+        	instance = inst;
+    	} else {
+    		throw new InstanceAlreadyExistsException("The static Main instance has already been set.");
+    	}
     }
     
     public static Configuration getConfigBotCommand() {
@@ -242,5 +260,8 @@ public class Main extends Plugin {
 		if (Discord.api != null) {
 			Discord.api.disconnect();
 		}
+		
+		// Useful after a test, to reset the instance for the next test suite.
+		instance = null;
 	}
 }

@@ -1,18 +1,25 @@
 package me.prouser123.bungee.discord.tests.bungeeversionsplit;
 
 import me.prouser123.bungee.discord.BungeeVersionSplit;
+
 import org.junit.Test;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 public class WaterfallTest {
 	
-	public static Core c = new Core(Core.ConstantVersions.waterfall);
+	private static Core c = new Core(Core.ConstantVersions.waterfall);
 
 	@BeforeClass
     public static void setUp() throws Exception {
         c.bvs = new BungeeVersionSplit(c.getProxy());
     }
+	
+	@AfterClass
+	public static void stripDown() {
+		c.main.onDisable();
+	}
 
 	@Test
 	public void testGetJenkinsBuildNumber() {

@@ -7,7 +7,11 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import javax.management.InstanceAlreadyExistsException;
+
 import org.powermock.api.mockito.PowerMockito;
+
+import org.junit.Assert;
 
 import me.prouser123.bungee.discord.BungeeVersionSplit;
 import me.prouser123.bungee.discord.Main;
@@ -264,8 +268,15 @@ public class Core {
 
 	public Core(String proxyVersion) {
 		this.proxyVersion = proxyVersion;
-		Main.instance = main;
+		
+		try {
+			Main.setInst(main);
+		} catch (InstanceAlreadyExistsException e) {
+			Assert.fail(e.getMessage());
+		}
+		
         PowerMockito.when(main.getLogger()).thenReturn(logger);
+        PowerMockito.doCallRealMethod().when(main).onDisable();
 	}
 	
 	public ProxyServer getProxy() {
