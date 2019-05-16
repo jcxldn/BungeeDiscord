@@ -37,6 +37,14 @@ import net.md_5.bungee.api.scheduler.TaskScheduler;
 @SuppressWarnings("deprecation")
 public class Core {
 	
+	private String proxyVersion;
+	
+	private Logger logger = Logger.getLogger(Core.class.getName());
+	
+	public BungeeVersionSplit bvs;
+	
+	public Main main = PowerMockito.mock(Main.class);
+	
 	/**
 	 * Server version constants for popular platforms.
 	 */
@@ -46,11 +54,7 @@ public class Core {
 		public static final String waterfall = "git:Waterfall-Bootstrap:1.14-SNAPSHOT:b438f80:282";
 	}
 	
-	private static String proxyVersion;
-	
-	private static Logger logger = Logger.getLogger(Core.class.getName());
-	
-	private static final ProxyServer proxyServer = new ProxyServer() {
+	private final ProxyServer proxyServer = new ProxyServer() {
 		
 		@Override
 		public String getVersion() {
@@ -256,13 +260,10 @@ public class Core {
 		}
 		
 	};
-	
-	public BungeeVersionSplit bvs;
-	
-	public Main main = PowerMockito.mock(Main.class);
+
 
 	public Core(String proxyVersion) {
-		Core.proxyVersion = proxyVersion;
+		this.proxyVersion = proxyVersion;
 		Main.instance = main;
         PowerMockito.when(main.getLogger()).thenReturn(logger);
 	}

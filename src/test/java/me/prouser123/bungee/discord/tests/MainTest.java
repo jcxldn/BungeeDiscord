@@ -11,7 +11,7 @@ import org.junit.Assert;
 public class MainTest {
 	
 	@Test
-	public void isModuleTest_module() {
+	public void isModuleTestAsModule() {
 		MockPlugin mp = new MockPlugin("git:cmd_list:1.13-SNAPSHOT:a907bbd:11", "SpigotMC");
 		Core cc = new Core(Core.ConstantVersions.bungeecord);
 		
@@ -21,7 +21,7 @@ public class MainTest {
 	}
 	
 	@Test
-	public void isModuleTest_not_module() {
+	public void isModuleTestAsNotModule() {
 		MockPlugin mp = new MockPlugin("69.0-STABLE", "MemeSquad");
 		
 		Core cc = new Core(Core.ConstantVersions.bungeecord);
