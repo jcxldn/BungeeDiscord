@@ -13,8 +13,6 @@ import me.prouser123.bungee.discord.Main;
 
 public class Discord {
 	
-	public static String token = null; // Bot token
-	
 	/**
 	 * Discord API Instance
 	 */
@@ -30,8 +28,6 @@ public class Discord {
 			api.disconnect();
 			api = null;
 		}
-		
-		Discord.token = token;
 		
 		// Create an Instance of the DiscordApi
 		try {
