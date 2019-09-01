@@ -99,6 +99,10 @@ public class Discord {
 		api.updateActivity(status);
 	}
 	
+	public static String getStatus() {
+		return api.getActivity().get().getName();
+	}
+	
 	public static boolean isAdmin(MessageCreateEvent event) {
 		return event.getMessage().getAuthor().isServerAdmin();
 	}

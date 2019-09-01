@@ -22,7 +22,7 @@ public class Main {
         	sender.sendMessage(new TextComponent(ChatColor.GOLD + "There is a new update available: v" + UpdateChecker.availableVersion));
         }
         
-        sender.sendMessage(new TextComponent(InGameCommand.connectedAsUser(false)));
+        sender.sendMessage(new TextComponent(InGameCommand.connectedAsUser(false) + " (Playing " + ChatColor.DARK_AQUA + Discord.getStatus() + ChatColor.GRAY + ")"));
         
         if (Discord.isConnected()) {
         	// Create and print a nicely formatted list of the names of discord servers the bot is in
