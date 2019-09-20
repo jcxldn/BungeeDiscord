@@ -15,15 +15,13 @@
 # Note that if you delete this file any changes to it will be lost.
 # ------------------------------------------------------------------------------------------
 
+# There are also other commands under the '!bd' prefix.
+# Type '!bd' in discord to see all commands.
 
 # Server Info
 server-info:
   command: '!serverinfo'
   description: 'Show server information.'
-# Bot Info
-bot-info:
-  command: '!botinfo'
-  description: 'Show bot information.'
 # Players
 players:
   command: '!players'
