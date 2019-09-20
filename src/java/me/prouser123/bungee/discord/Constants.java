@@ -11,5 +11,5 @@ public final class Constants {
 	public static final String authorIconURL = "https://cdn.discordapp.com/embed/avatars/0.png";
 	
 	// Footer - Icon (Prouser123 Discord Photo)
-	public static final String footerIconURL = "https://cdn.discordapp.com/avatars/215119410103451648/575d90fdda8663b633e36f8b8c06c719.png";
+	public static final String footerIconURL = "https://prouser123.me/images/logo2_2048.png";
 }

@@ -8,6 +8,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
+import me.prouser123.bungee.discord.Constants;
 import me.prouser123.bungee.discord.Main;
 import me.prouser123.bungee.discord.base.BaseCommand;
 import net.md_5.bungee.api.config.ServerInfo;
@@ -28,7 +29,7 @@ public class Players implements MessageCreateListener, BaseCommand {
         	EmbedBuilder embed2 = new EmbedBuilder()
         			.setTitle("Online Players")
                     .setDescription("All players currently online on the network.")
-                	.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd"/*.split("-")[0]*/, "https://cdn.discordapp.com/avatars/215119410103451648/575d90fdda8663b633e36f8b8c06c719.png");
+                	.setFooter("Bungee Discord " + Main.inst().getDescription().getVersion().toString() + " | !bd", Constants.footerIconURL);
         	
         	// Make sure some players are online first
         	if (Main.inst().getProxy().getPlayers().size() == 0) {
