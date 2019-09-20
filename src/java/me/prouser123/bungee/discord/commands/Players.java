@@ -53,13 +53,10 @@ public class Players implements MessageCreateListener, BaseCommand {
             // Add the players to the map
             for ( ProxiedPlayer player : Main.inst().getProxy().getPlayers() )
             {
-            	// TODO: Why does it do this?
-            	// NPE when adding
             	try {
-                    map.get(player.getServer().getInfo().getName()).add(player.getDisplayName());
-            	} catch (NullPointerException e) {
-            		Main.inst().getLogger().warning("Encountered an NPE when adding the player to the HashMap.");
-            		continue;
+                	map.get(player.getServer().getInfo().getName()).add(player.getDisplayName());
+            	} catch (NullPointerException e){
+            		//
             	}
                 
             }
